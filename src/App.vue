@@ -36,6 +36,25 @@
     <v-main>
       <router-view />
     </v-main>
+
+    <v-bottom-navigation :value="nav" color="primary" shift>
+      <v-btn to="/about">
+        <span>About</span>
+
+        <v-icon>mdi-history</v-icon>
+      </v-btn>
+
+      <v-btn to="/">
+        <span>Home</span>
+        <v-icon>mdi-home</v-icon>
+      </v-btn>
+
+      <v-btn to="/sample">
+        <span>Sample</span>
+
+        <v-icon>mdi-map-marker</v-icon>
+      </v-btn>
+    </v-bottom-navigation>
   </v-app>
 </template>
 
@@ -44,7 +63,7 @@ export default {
   name: 'App',
 
   data: () => ({
-    //
+    nav: 1,
   }),
 }
 </script>

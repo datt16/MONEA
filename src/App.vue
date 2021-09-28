@@ -8,7 +8,7 @@
           contain
           src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
           transition="scale-transition"
-          width="30"
+          width="20"
         />
 
         <v-img

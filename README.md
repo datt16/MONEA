@@ -20,4 +20,8 @@ https://monea-8247b.web.app/
 
 ## プロトタイプ
 
-<iframe width="428" height="926" src="https://xd.adobe.com/embed/ce2010f8-0322-4eba-a73f-2e6f13874972-9b73/" frameborder="0" allowfullscreen></iframe>
+[こちらからプロトタイプのプレビューに飛べます →](https://xd.adobe.com/view/ce2010f8-0322-4eba-a73f-2e6f13874972-9b73/)
+
+### スクリーンショット
+
+![ホーム画面](<https://github.com/datt16/MONEA/blob/Images/docs/Images/prototypes/2021-10-03%20(1).png>)

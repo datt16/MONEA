@@ -34,12 +34,15 @@
     </v-app-bar>
 
     <v-main>
+      <div id="room-switcher" class="d-flex pa-3">
+        <div class="text-h5">4J教室</div>
+      </div>
       <router-view />
     </v-main>
 
     <v-bottom-navigation :value="nav" color="primary" shift fixed>
-      <v-btn to="/about">
-        <span>About</span>
+      <v-btn to="/history">
+        <span>History</span>
 
         <v-icon>mdi-history</v-icon>
       </v-btn>

@@ -1,8 +1,5 @@
 <template>
   <div id="home">
-    <div id="room-switcher" class="d-flex pa-3">
-      <div class="text-h5">4J教室</div>
-    </div>
     <div class="px-3 pb-3">
       <v-card min-width="350px" min-height="200px" color="grey"></v-card>
     </div>

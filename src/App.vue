@@ -37,7 +37,7 @@
       <router-view />
     </v-main>
 
-    <v-bottom-navigation :value="nav" color="primary" shift>
+    <v-bottom-navigation :value="nav" color="primary" shift fixed>
       <v-btn to="/about">
         <span>About</span>
 

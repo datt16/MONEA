@@ -24,4 +24,8 @@ https://monea-8247b.web.app/
 
 ### スクリーンショット
 
-![ホーム画面](<https://github.com/datt16/MONEA/blob/Images/docs/Images/prototypes/2021-10-03%20(1).png>)
+<img src="<https://github.com/datt16/MONEA/blob/Images/docs/Images/prototypes/2021-10-03%20(2).png>" alt="ホーム画面" style="zoom:50%;"/>
+
+<img src="<https://github.com/datt16/MONEA/blob/Images/docs/Images/prototypes/2021-10-03%20(5).png>" alt="テーブル表示" style="zoom:50%">
+
+<img src="<https://github.com/datt16/MONEA/blob/Images/docs/Images/prototypes/2021-10-03%20(4).png>" alt="ヒートマップ表示" style="zoom:50%">

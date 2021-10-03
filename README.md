@@ -1,24 +1,23 @@
-# monea
+# MONEA
 
-## Project setup
-```
-npm install
-```
+## デプロイ先
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+https://monea-8247b.web.app/
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## 機能詳細
 
-### Lints and fixes files
-```
-npm run lint
-```
+「換気状況表示」「計測結果表示」の 2 機能を
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 換気状況表示機能
+
+複数台のセンサーの値から、適切な換気が行われているかどうかを判定する。  
+適切な換気が行われているかどうかをアイコンやテキストを用いて表示する。
+
+### 計測結果表示機能
+
+記録された測定結果や換気状況を表やヒートマップで表示する。
+過去に適切な換気が行われていたかどうかや、二酸化炭素濃度が高かった時間帯の把握ができる。
+
+## プロトタイプ
+
+<iframe width="428" height="926" src="https://xd.adobe.com/embed/ce2010f8-0322-4eba-a73f-2e6f13874972-9b73/" frameborder="0" allowfullscreen></iframe>

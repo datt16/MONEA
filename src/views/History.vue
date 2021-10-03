@@ -1,7 +1,9 @@
 <template>
   <div id="history">
     <v-row no-gutters>
-      <v-card min-width="350px" min-height="620px" color="grey"></v-card>
+      <v-col cols="12">
+        <v-card min-width="350px" min-height="620px" color="grey"></v-card>
+      </v-col>
     </v-row>
   </div>
 </template>

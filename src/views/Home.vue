@@ -1,29 +1,25 @@
 <template>
   <div id="home">
-    <div class="px-3 pb-3">
+    <v-row no-gutters>
       <v-card min-width="350px" min-height="200px" color="grey"></v-card>
-    </div>
+    </v-row>
 
-    <div class="px-3">
-      <v-row no-gutters>
-        <v-col xs="6" class="pr-3">
-          <v-card min-width="100px" min-height="100px" color="grey"></v-card>
-        </v-col>
-        <v-col xs="6">
-          <v-card min-width="100px" min-height="100px" color="grey"></v-card>
-        </v-col>
-      </v-row>
-      <v-row no-gutters class="pt-3">
-        <v-col xs="6" class="pr-3">
-          <v-card min-width="100px" min-height="100px" color="grey"></v-card>
-        </v-col>
-        <v-col xs="6">
-          <v-card min-width="100px" min-height="100px" color="grey"></v-card>
-        </v-col>
-      </v-row>
-    </div>
+    <v-row dense>
+      <v-col cols="6">
+        <v-card min-height="100px" color="grey"></v-card>
+      </v-col>
+      <v-col cols="6">
+        <v-card min-height="100px" color="grey"></v-card>
+      </v-col>
+      <v-col cols="6">
+        <v-card min-height="100px" color="grey"></v-card>
+      </v-col>
+      <v-col cols="6">
+        <v-card min-height="100px" color="grey"></v-card>
+      </v-col>
+    </v-row>
 
-    <div class="pa-3">
+    <div class="py-2">
       <v-card min-width="350px" min-height="200px" color="grey"></v-card>
     </div>
   </div>

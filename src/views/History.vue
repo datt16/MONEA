@@ -1,8 +1,8 @@
 <template>
   <div id="history">
-    <div class="px-3 pb-3">
+    <v-row no-gutters>
       <v-card min-width="350px" min-height="620px" color="grey"></v-card>
-    </div>
+    </v-row>
   </div>
 </template>
 

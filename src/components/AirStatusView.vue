@@ -11,6 +11,7 @@ export default {
   name: 'AirStatusView',
 }
 </script>
+
 <style scoped>
 .air-sratus-view{
   background-color:white;

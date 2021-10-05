@@ -1,12 +1,41 @@
 <template>
-  <div>
-    <div class="text-h3">換気状況</div>
+  <div id="home">
+    <v-row no-gutters>
+      <v-col cols="12">
+        <air-status-view />
+      </v-col>
+    </v-row>
+
+    <v-row dense>
+      <v-col cols="6" md="3">
+        <value-view />
+      </v-col>
+      <v-col cols="6" md="3">
+        <v-card min-height="100px" color="grey"></v-card>
+      </v-col>
+      <v-col cols="6" md="3">
+        <v-card min-height="100px" color="grey"></v-card>
+      </v-col>
+      <v-col cols="6" md="3">
+        <v-card min-height="100px" color="grey"></v-card>
+      </v-col>
+    </v-row>
+
+    <v-row class="py-2" no-gutters>
+      <v-col cols="12">
+        <chart-view />
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <script>
+import AirStatusView from '@/components/AirStatusView.vue'
+import ValueView from '@/components/ValueView.vue'
+import ChartView from '@/components/ChartView.vue'
+
 export default {
   name: 'Home',
-  components: {},
+  components: { AirStatusView, ValueView, ChartView },
 }
 </script>

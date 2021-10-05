@@ -28,19 +28,23 @@
         target="_blank"
         text
       >
-        <span class="mr-2">Latest Release</span>
+        <span class="mr-2">build:2021/10/04 9:22</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
 
     <v-main>
-      <router-view />
+      <v-container>
+        <div id="room-switcher" class="pb-3">
+          <div class="text-h5">4J教室</div>
+        </div>
+        <router-view />
+      </v-container>
     </v-main>
 
-    <v-bottom-navigation :value="nav" color="primary" shift>
-      <v-btn to="/about">
-        <span>About</span>
-
+    <v-bottom-navigation :value="nav" color="primary" shift fixed>
+      <v-btn to="/history">
+        <span>History</span>
         <v-icon>mdi-history</v-icon>
       </v-btn>
 

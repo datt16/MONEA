@@ -1,7 +1,9 @@
 <template>
   <div id="air-status-view">
     <v-card min-width="350px" min-height="200px" color="grey">
-      換気状況
+      <v-card-text>
+        適切に換気されています。
+      </v-card-text>
     </v-card>
   </div>
 </template>
@@ -11,3 +13,8 @@ export default {
   name: 'AirStatusView',
 }
 </script>
+<style scoped>
+.air-sratus-view{
+  background-color:white;
+}
+</style>

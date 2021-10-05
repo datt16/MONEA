@@ -1,40 +1,72 @@
 <template>
-  <v-app>
-    <v-app-bar app color="error" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+  <v-app id="inspire">
+    <v-app-bar
+      app
+      shrink-on-scroll
+    >
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+      <v-toolbar-title>test</v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <v-spacer>test</v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
+      <v-btn icon>
+        <v-iocn>mdi-dots-vertical</v-iocn>
       </v-btn>
     </v-app-bar>
 
+
     <v-main>
-      <router-view />
+      <v-container>
+        <v-row justify="center">
+          <v-col
+            :key="n"
+            cols="5"
+          >
+            <v-card height="300" class="red--text" >test1</v-card>
+          </v-col>
+                    <v-col
+            :key="n"
+            cols="5"
+          >
+            <v-card height="300" class="blue--text">
+              test2
+              <v-img
+                alt="Vuetify Logo"
+                class="shrink mr-2"
+                contain
+                src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
+                transition="scale-transition"
+                width="2500"
+              />
+            </v-card>
+          </v-col>
+                    <v-col
+            :key="n"
+            cols="5"
+          >
+            <v-card height="300" class="green--text">
+              test3
+              <v-img
+                alt="Vuetify Logo"
+                class="shrink mr-2"
+                contain
+                src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
+                transition="scale-transition"
+                width="2500"
+              />
+            </v-card>
+          </v-col>
+                    <v-col
+            :key="n"
+            cols="5"
+          >
+            <v-card height="300" class="yellow--text">
+              test4
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-main>
   </v-app>
 </template>

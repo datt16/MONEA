@@ -1,9 +1,13 @@
 <template>
   <div id="air-status-view">
     <v-card tile min-width="350px" min-height="200px" color="white">
-      <v-card-text>
-      換気されています。
-      </v-card-text>
+      <v-list-item three-line>
+        <v-list-item-content>
+          <v-list-item-title class="text-h5 mb-1">
+            適切に換気されています。
+          </v-list-item-title>    
+        </v-list-item-content>      
+      </v-list-item>
     </v-card>
   </div>
 </template>

@@ -41,33 +41,17 @@
         <router-view />
       </v-container>
     </v-main>
-
-    <v-bottom-navigation :value="nav" color="primary" shift fixed>
-      <v-btn to="/history">
-        <span>History</span>
-        <v-icon>mdi-history</v-icon>
-      </v-btn>
-
-      <v-btn to="/">
-        <span>Home</span>
-        <v-icon>mdi-home</v-icon>
-      </v-btn>
-
-      <v-btn to="/sample">
-        <span>Sample</span>
-
-        <v-icon>mdi-map-marker</v-icon>
-      </v-btn>
-    </v-bottom-navigation>
+    <bottom-nav />
   </v-app>
 </template>
 
 <script>
+import bottomNav from '@/components/bottomNavigation.vue'
+
 export default {
   name: 'App',
+  components: { bottomNav },
 
-  data: () => ({
-    nav: 1,
-  }),
+  data: () => ({}),
 }
 </script>

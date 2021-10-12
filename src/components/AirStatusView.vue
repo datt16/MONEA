@@ -1,26 +1,25 @@
 <template>
   <div id="air-status-view">
     <v-card tile min-width="350px" min-height="200px" color="white">
-      <v-list-item three-line>
-        <v-list-item-content>
-          <v-list-item-title class="title">
+        <v-card-title class="text-h5 justify-center">
             適切に換気されています。
-          </v-list-item-title>    
-        </v-list-item-content>  
-        <v-list-item-subtitle>
+        </v-card-title>    
+        <v-card-text>
           4/4 センサー異常なし
-        </v-list-item-subtitle>
-        <v-list-item-subtitle>
+        </v-card-text>
+        <v-card-text >
           平均CO2濃度 600未満
-        </v-list-item-subtitle>
-      </v-list-item>
+        </v-card-text>
     </v-card>
   </div>
 </template>
+
+
 
 <script>
 export default {
   name: 'AirStatusView',
 }
 </script>
+
 

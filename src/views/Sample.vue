@@ -1,6 +1,5 @@
 <template>
   <div class="justify-center">
-    <v-subheader>追加</v-subheader>
     <v-container fluid>
       <v-card min-width="300px" outlined>
         <div class="pa-5 d-flex align-center">
@@ -23,12 +22,46 @@
         </div>
       </v-card>
     </v-container>
+    <v-list>
+      <v-subheader>操作</v-subheader>
+      <v-list-item v-for="act in actions" :key="act.title" link>
+        <v-list-item-avatar>
+          <v-icon :class="act.color" dark v-text="act.icon"></v-icon>
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title>{{ act.title }}</v-list-item-title>
+          <v-list-item-subtitle>{{ act.subtitle }}</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Sample',
+  data: () => ({
+    actions: [
+      {
+        color: 'blue',
+        icon: 'mdi-access-point-plus',
+        title: 'センサーの追加',
+        subtitle: '部屋にセンサーを登録します。',
+      },
+      {
+        color: 'blue',
+        icon: 'mdi-card-plus',
+        title: '部屋の追加',
+        subtitle: '新しい部屋のセットアップを行います。',
+      },
+      {
+        color: 'red accent-2',
+        icon: 'mdi-information',
+        title: 'バージョン情報',
+        subtitle: 'Build : 2021-10-17',
+      },
+    ],
+  }),
 }
 </script>
 

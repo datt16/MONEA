@@ -7,16 +7,15 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn color="blue lighten-5" depressed>
-        <span class="mr-2">build:2021/10/04 9:22</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <v-avatar color="primary" size="36">
+        <v-icon dark> mdi-account-circle </v-icon>
+      </v-avatar>
     </v-app-bar>
 
     <v-main>
       <v-container>
         <div id="room-switcher" class="pb-3">
-          <div class="text-h5 ml-3">4J教室</div>
+          <room-switcher />
         </div>
         <router-view />
       </v-container>
@@ -27,10 +26,11 @@
 
 <script>
 import bottomNav from '@/components/bottomNavigation.vue'
+import roomSwitcher from '@/components/RoomSwitcher.vue'
 
 export default {
   name: 'App',
-  components: { bottomNav },
+  components: { bottomNav, roomSwitcher },
 
   data: () => ({}),
 }

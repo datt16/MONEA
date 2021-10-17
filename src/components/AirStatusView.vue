@@ -23,6 +23,8 @@
         <v-divider></v-divider>
 
         <v-card-text>
+          センサー配置図
+        <v-card-text>
           　HELP
         </v-card-text>
        </div>
@@ -36,3 +38,16 @@ export default {
   name: 'AirStatusView'
 }
 </script>
+
+<style>
+@import "./css/styles.css";
+@import url('https://fonts.googleapis.com/css2?family=Kosugi&display=swap');
+#air-status-view{
+  font-family:  'Kosugi', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>

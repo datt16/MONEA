@@ -2,12 +2,12 @@
   <div id="air-status-view">
     <v-card tile min-width="350px" min-height="200px" color="white">
         <v-card-title class="text-h4 justify-center mx-auto">
-            適切に換気されています。
+          適切に換気されています。
         </v-card-title>    
         <v-card-text class="text-h6 justify-center mx-auto">
           4/4 センサー異常なし
         </v-card-text>
-         <v-card-text class="text-h6 justify-center mx-auto">
+        <v-card-text class="text-h6 justify-center mx-auto">
           平均CO2濃度 600未満
         </v-card-text>
 
@@ -24,10 +24,11 @@
 
         <v-card-text>
           センサー配置図
-        <v-card-text>
-          　HELP
         </v-card-text>
-       </div>
+        <v-card-text>
+          HELP
+        </v-card-text>
+        </div>
       </v-expand-transition>
     </v-card>
   </div>
@@ -42,8 +43,9 @@ export default {
 <style>
 @import "./css/styles.css";
 @import url('https://fonts.googleapis.com/css2?family=Kosugi&display=swap');
-#air-status-view{
-  font-family:  'Kosugi', sans-serif;
+#app {
+/* Google fontsで導入したいfontsからfont-familyを取ってくる */
+  font-family: 'Kosugi', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

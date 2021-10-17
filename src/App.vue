@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import bottomNav from '@/components/bottomNavigation.vue'
+import bottomNav from '@/components/BottomNavigation.vue'
 import roomSwitcher from '@/components/RoomSwitcher.vue'
 import appBar from '@/components/AppBar.vue'
 

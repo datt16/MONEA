@@ -11,10 +11,10 @@
         <v-icon>mdi-home</v-icon>
       </v-btn>
 
-      <v-btn to="/sample" icon style="height: 100%">
-        <span>Sample</span>
+      <v-btn to="/actions" icon style="height: 100%">
+        <span>Actions</span>
 
-        <v-icon>mdi-map-marker</v-icon>
+        <v-icon>mdi-menu</v-icon>
       </v-btn>
     </v-bottom-navigation>
   </div>

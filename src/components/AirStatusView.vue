@@ -1,10 +1,10 @@
 <template>
   <div id="air-status-view">
     <v-card tile min-width="350px" min-height="200px" color="white">
-        <v-card-title v-if="ventilation === 1" class="text-h5 text-center">
+        <v-card-title v-if="ventilation === 1" class="text-h5 justify-center mb-1">
           適切に換気されています。
         </v-card-title>    
-        <v-card-title v-else class="text-h5 text-center">
+        <v-card-title v-else-if="ventilation === 0" class="text-h5 justify-center mb-1">
           換気が必要です。
         </v-card-title> 
 
@@ -24,11 +24,11 @@
           0/4 センサー異常あり
         </p>
 
-        <p v-if="average < 600" class="text-subtitle-1 text-center">
-          平均CO2濃度 600未満
+        <p v-if="average >= 600" class="text-subtitle-1 text-center">
+          平均CO2濃度 600以上
         </p>
         <p v-else class="text-subtitle-1 text-center">
-          平均CO2濃度 600以上
+          平均CO2濃度 600未満
         </p>
 
     </v-card>

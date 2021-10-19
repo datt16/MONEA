@@ -1,35 +1,35 @@
 <template>
   <div id="air-status-view">
     <v-card tile min-width="350px" min-height="200px" color="white">
-        <v-card-title class="text-h4 justify-center mx-auto">
+        <v-card-title v-if="ventilation" class="text-h4 justify-center mx-auto">
           適切に換気されています。
         </v-card-title>    
-        <v-card-text class="text-h6 justify-center mx-auto">
+        <v-card-title v-else class="text-h4 justify-center mx-auto">
+          換気が必要です。
+        </v-card-title> 
+
+        <v-card-text v-if="sensor = 4" class="text-h6 justify-center mx-auto">
           4/4 センサー異常なし
         </v-card-text>
-        <v-card-text class="text-h6 justify-center mx-auto">
+        <v-card-text v-else-if="sensor = 3" class="text-h6 justify-center mx-auto">
+          3/4 センサー異常あり
+        </v-card-text>
+        <v-card-text v-else-if="sensor = 2" class="text-h6 justify-center mx-auto">
+          2/4 センサー異常あり
+        </v-card-text>
+        <v-card-text v-else-if="sensor = 1" class="text-h6 justify-center mx-auto">
+          1/4 センサー異常あり
+        </v-card-text>
+        <v-card-text v-else-if="sensor = 0" class="text-h6 justify-center mx-auto">
+          0/4 センサー異常あり
+        </v-card-text>
+
+        <v-card-text v-if="average < 600" class="text-h6 justify-center mx-auto">
           平均CO2濃度 600未満
         </v-card-text>
-
-        <v-card-actions>
-          <v-btn icon@click="show = !show">
-            <v-icon>
-              {{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-          </v-btn>
-        </v-card-actions>
-
-      <v-expand-transition>
-       <div v-show="show">
-        <v-divider></v-divider>
-
-        <v-card-text>
-          センサー配置図
+        <v-card-text v-else class="text-h6 justify-center mx-auto">
+          平均CO2濃度 600以上
         </v-card-text>
-        <v-card-text>
-          HELP
-        </v-card-text>
-        </div>
-      </v-expand-transition>
     </v-card>
   </div>
 </template>
@@ -38,5 +38,24 @@
 export default {
   name: 'AirStatusView'
 }
+new Vue({
+  el: 'air-status-view',
+  data: {
+   ventilation: true
+  }
+ })
+new Vue({
+  el: 'air-status-view',
+  data: {
+   sensor: 2
+  }
+ })
+new Vue({
+  el: 'air-status-view',
+  data: {
+   average: 600
+  }
+ })
+
 </script>
 

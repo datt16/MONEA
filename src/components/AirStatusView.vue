@@ -1,7 +1,7 @@
 <template>
   <div id="air-status-view">
     <v-card tile min-width="350px" min-height="200px" color="white">
-        <v-card-title v-if="ventilation" class="text-h4 justify-center mx-auto">
+        <v-card-title v-if="ventilation = 1" class="text-h4 justify-center mx-auto">
           適切に換気されています。
         </v-card-title>    
         <v-card-title v-else class="text-h4 justify-center mx-auto">
@@ -30,32 +30,23 @@
         <v-card-text v-else class="text-h6 justify-center mx-auto">
           平均CO2濃度 600以上
         </v-card-text>
+
     </v-card>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'AirStatusView'
+  name: 'AirStatusView',
+  data(){
+    return{
+      ventilation:1,
+      sensor:3,
+      avarage:600
+    }
+  }
 }
-new Vue({
-  el: 'air-status-view',
-  data: {
-   ventilation: true
-  }
- })
-new Vue({
-  el: 'air-status-view',
-  data: {
-   sensor: 2
-  }
- })
-new Vue({
-  el: 'air-status-view',
-  data: {
-   average: 600
-  }
- })
+
 
 </script>
 

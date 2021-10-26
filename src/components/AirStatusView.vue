@@ -18,12 +18,25 @@
         </div>
       </div>
         
-        <p v-if="sensor === 4" class="text-subtitle-1 text-center my-4">
-          4/4 センサー異常なし
-        </p>
-        <p v-else-if="sensor === 3" class="text-subtitle-1 text-center my-4">
-          3/4 センサー異常あり
-        </p>
+      <div v-if="sensor === 4">
+        <div class="pa-5 align-center">
+          <v-icon color="LIME">mdi-Circle-Outline</v-icon>
+          <div class="my-4">
+            <p  class="text-subtitle-1 text-center">
+              4/4 センサー異常なし
+            </p>
+          </div> 
+        </div>
+      </div>
+      <div v-else-if="sensor === 3">
+        <div class="pa-5 align-center">
+          <div class="my-4">
+            <p  class="text-subtitle-1 text-center">
+              3/4 センサー異常あり
+            </p>
+          </div>
+        </div>
+      </div>
         <p v-else-if="sensor === 2" class="text-subtitle-1text-center my-4">
           2/4 センサー異常あり
         </p>

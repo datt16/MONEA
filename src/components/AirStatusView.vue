@@ -1,39 +1,36 @@
 <template>
   <div id="air-status-view">
     <v-card tile min-width="350px" min-height="200px" color="white">
-        <v-icon large v-if="sensor === 4" color="LIME" class="mr-auto">mdi-Check-Bold</v-icon>
-        <v-icon large v-if="sensor >= 3" color="RED" class="mr-auto">mdi-Close-Thick</v-icon>
-        <v-card-title v-if="ventilation === 1" class="text-h5 justify-center mt-5">
+        <v-icon large v-if="ventilation === 1" color="LIME">mdi-Check-Bold</v-icon>
+        <v-card-title v-if="ventilation === 1" class="text-h5 justify-center my-4">
           適切に換気されています
         </v-card-title>    
-        <v-card-title v-else-if="ventilation === 0" class="text-h5 justify-center mt-5">
+        <v-card-title v-else class="text-h5 justify-center my-4">
           換気が必要です
         </v-card-title> 
 
-        <v-icon v-if="sensor === 4" color="LIME" class="mr-auto">mdi-Circle-Outline</v-icon>
-        <v-icon v-if="sensor >= 3" color="RED" class="">mdi-Close-Thick</v-icon>
-        <p v-if="sensor === 4" class="text-subtitle-1 text-center">
+        
+        <p v-if="sensor === 4" class="text-subtitle-1 text-center my-4">
           4/4 センサー異常なし
         </p>
-        <p v-else-if="sensor === 3" class="text-subtitle-1 text-center">
+        <p v-else-if="sensor === 3" class="text-subtitle-1 text-center my-4">
           3/4 センサー異常あり
         </p>
-        <p v-else-if="sensor === 2" class="text-subtitle-1text-center">
+        <p v-else-if="sensor === 2" class="text-subtitle-1text-center my-4">
           2/4 センサー異常あり
         </p>
-        <p v-else-if="sensor === 1" class="text-subtitle-1 text-center">
+        <p v-else-if="sensor === 1" class="text-subtitle-1 text-center my-4">
           1/4 センサー異常あり
         </p>
-        <p v-else class="text-subtitle-1 text-center">
+        <p v-else class="text-subtitle-1 text-center my-4">
           0/4 センサー異常あり
         </p>
 
-        <v-icon v-if="sensor === 4" color="LIME" class="mr-auto">mdi-Circle-Outline</v-icon>
-        <v-icon v-if="sensor >= 3" color="RED" class="mr-auto">mdi-Close-Thick</v-icon>
-        <p v-if="average >= 600" class="text-subtitle-1 text-center">
+        
+        <p v-if="average >= 600" class="text-subtitle-1 text-center my-4">
           平均CO2濃度 600以上
         </p>
-        <p v-else class="text-subtitle-1 text-center">
+        <p v-else class="text-subtitle-1 text-center my-4">
           平均CO2濃度 600未満
         </p>
 
@@ -54,6 +51,8 @@ export default {
 }
 
 </script>
+<style>
 
+</style>
 
 

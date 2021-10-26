@@ -1,14 +1,22 @@
 <template>
   <div id="air-status-view">
     <v-card tile min-width="350px" min-height="200px" color="white">
-        <v-icon large v-if="ventilation === 1" color="LIME">mdi-Check-Bold</v-icon>
-        <v-card-title v-if="ventilation === 1" class="text-h5 justify-center my-4">
-          適切に換気されています
-        </v-card-title>    
-        <v-card-title v-else class="text-h5 justify-center my-4">
-          換気が必要です
-        </v-card-title> 
-
+      <div v-if="ventilation === 1">
+        <div  class="pa-5 align-center">
+          <v-icon color="LIME">mdi-Check-Bold</v-icon>
+          <div  class="my-4">
+            <p class="text-h5 text-center">適切に換気されています</p>  
+          </div>  
+        </div>
+      </div>
+      <div v-else>
+        <div class="pa-5 align-center">
+          <v-icon large color="LIME">mdi-Check-Bold</v-icon>
+          <div class="my-4">
+            <p class="text-h5 text-center">換気が必要です</p> 
+          </div>
+        </div>
+      </div>
         
         <p v-if="sensor === 4" class="text-subtitle-1 text-center my-4">
           4/4 センサー異常なし
@@ -43,7 +51,7 @@ export default {
   name: 'AirStatusView',
   data(){
     return{
-      ventilation:0,
+      ventilation:1,
       sensor:1,
       avarage:500,
     }

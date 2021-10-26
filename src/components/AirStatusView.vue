@@ -2,26 +2,19 @@
   <div id="air-status-view">
     <v-card tile min-width="350px" min-height="200px" color="white">
       <div v-if="ventilation === 1">
-        <div  class="pa-5 align-center">
-          <v-icon color="LIME">mdi-Check-Bold</v-icon>
-          <div  class="my-4">
-            <p class="text-h5 text-center">適切に換気されています</p>  
+          <div  class="mt-4 pb-2">
+            <p font-weight="bold" class="text-h5 text-center">適切に換気されています</p>  
           </div>  
-        </div>
       </div>
       <div v-else>
-        <div class="pa-5 align-center">
-          <v-icon large color="LIME">mdi-Check-Bold</v-icon>
-          <div class="my-4">
-            <p class="text-h5 text-center">換気が必要です</p> 
+          <div class="mt-4 pb-2">
+            <p font-weight="bold" class="text-h5 text-center">換気が必要です</p> 
           </div>
-        </div>
       </div>
         
       <div v-if="sensor === 4">
-        <div class="pa-5 align-center">
-          <v-icon color="LIME">mdi-Circle-Outline</v-icon>
-          <div class="my-4">
+        <div>
+          <div class="my-2">
             <p  class="text-subtitle-1 text-center">
               4/4 センサー異常なし
             </p>
@@ -29,31 +22,60 @@
         </div>
       </div>
       <div v-else-if="sensor === 3">
-        <div class="pa-5 align-center">
-          <div class="my-4">
+        <div>
+          <div class="my-2">
             <p  class="text-subtitle-1 text-center">
               3/4 センサー異常あり
             </p>
           </div>
         </div>
       </div>
-        <p v-else-if="sensor === 2" class="text-subtitle-1text-center my-4">
-          2/4 センサー異常あり
-        </p>
-        <p v-else-if="sensor === 1" class="text-subtitle-1 text-center my-4">
-          1/4 センサー異常あり
-        </p>
-        <p v-else class="text-subtitle-1 text-center my-4">
-          0/4 センサー異常あり
-        </p>
+      <div v-else-if="sensor === 2">
+        <div>
+          <div class="my-2">
+            <p  class="text-subtitle-1 text-center">
+              2/4 センサー異常あり
+            </p>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="sensor === 1">
+        <div>
+          <div class="my-2">
+            <p  class="text-subtitle-1 text-center">
+              1/4 センサー異常あり
+            </p>
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        <div>
+          <div class="my-2">
+            <p  class="text-subtitle-1 text-center">
+              0/4 センサー異常あり
+            </p>
+          </div>
+        </div>
+      </div>
 
-        
-        <p v-if="average >= 600" class="text-subtitle-1 text-center my-4">
-          平均CO2濃度 600以上
-        </p>
-        <p v-else class="text-subtitle-1 text-center my-4">
-          平均CO2濃度 600未満
-        </p>
+      <div v-if="average >=600">
+        <div>
+          <div class="mb-4">
+            <p class="text-subtitle-1 text-center">
+              平均CO2濃度 600以上
+            </p>
+          </div>
+        </div>
+      </div>
+      <div v-else>
+        <div>
+          <div class="mb-4">
+            <p class="text-subtitle-1 text-center">
+              平均CO2濃度 600未満
+            </p>
+          </div>
+        </div>
+      </div>
 
     </v-card>
   </div>
@@ -72,8 +94,3 @@ export default {
 }
 
 </script>
-<style>
-
-</style>
-
-

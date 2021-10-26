@@ -6,7 +6,7 @@
       </v-col>
     </v-row>
 
-     <v-row dense>
+    <v-row dense>
       <v-col cols="6" md="3">
         <value-view />
       </v-col>

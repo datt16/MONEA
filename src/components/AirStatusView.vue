@@ -2,12 +2,12 @@
   <div id="air-status-view">
     <v-card tile min-width="350px" min-height="200px" color="white">
       <div v-if="ventilation === 1">
-          <div  class="pt-3 pb-2">
+          <div  class="pt-3">
             <p class="text-h5 text-center font-weight-bold">適切に換気されています</p>  
           </div>  
       </div>
       <div v-else>
-          <div class="pt-3 pb-2">
+          <div class="pt-3">
             <p class="text-h5 text-center font-weight-bold">換気が必要です</p> 
           </div>
       </div>
@@ -16,7 +16,7 @@
         <div>
           <div class="my-2">
             <p  class="text-subtitle-1 text-center">
-              4/4 センサー異常なし
+              4/4  センサー異常なし
             </p>
           </div> 
         </div>
@@ -25,7 +25,7 @@
         <div>
           <div class="my-2">
             <p  class="text-subtitle-1 text-center">
-              3/4 センサー異常あり
+              3/4  センサー異常あり
             </p>
           </div>
         </div>
@@ -34,7 +34,7 @@
         <div>
           <div class="my-2">
             <p  class="text-subtitle-1 text-center">
-              2/4 センサー異常あり
+              2/4  センサー異常あり
             </p>
           </div>
         </div>
@@ -43,7 +43,7 @@
         <div>
           <div class="my-2">
             <p  class="text-subtitle-1 text-center">
-              1/4 センサー異常あり
+              1/4  センサー異常あり
             </p>
           </div>
         </div>
@@ -52,7 +52,7 @@
         <div>
           <div class="my-2">
             <p  class="text-subtitle-1 text-center">
-              0/4 センサー異常あり
+              0/4  センサー異常あり
             </p>
           </div>
         </div>
@@ -62,7 +62,7 @@
         <div>
           <div class="pb-3">
             <p class="text-subtitle-1 text-center">
-              平均CO2濃度 600以上
+              平均CO2濃度  600以上
             </p>
           </div>
         </div>
@@ -71,7 +71,7 @@
         <div>
           <div class="pb-3">
             <p class="text-subtitle-1 text-center">
-              平均CO2濃度 600未満
+              平均CO2濃度  600未満
             </p>
           </div>
         </div>
@@ -86,8 +86,8 @@ export default {
   name: 'AirStatusView',
   data(){
     return{
-      ventilation:1,
-      sensor:1,
+      ventilation:0,
+      sensor:4,
       avarage:500,
     }
   }

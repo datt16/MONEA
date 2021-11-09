@@ -12,20 +12,16 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
+  css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-  ],
+  plugins: ['@/plugins/firebase/auth.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -41,14 +37,34 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa',
+    ['@nuxtjs/firebase'],
+    // '@nuxtjs/pwa',
   ],
+
+  firebase: {
+    config: {
+      apiKey: 'AIzaSyDhr1HHsWpWWPiFy8aPEjJ0OgsqHfvIYbU',
+      authDomain: 'monea-8247b.firebaseapp.com',
+      projectId: 'monea-8247b',
+      storageBucket: 'monea-8247b.appspot.com',
+      messagingSenderId: '334720942370',
+      appId: '1:334720942370:web:00cb962bc1af6ca6c3657b',
+      measurementId: 'G-F8VWWK5X61',
+    },
+    services: {
+      auth: {
+        initialize: {
+          onAuthStateChangedMutation: 'setUser', // ... 1
+        },
+      },
+    },
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
-    }
+      lang: 'ja',
+    },
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -64,13 +80,12 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
-      }
-    }
+          success: colors.green.accent3,
+        },
+      },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-  }
+  build: {},
 }

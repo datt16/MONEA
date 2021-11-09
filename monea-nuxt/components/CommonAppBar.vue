@@ -6,7 +6,7 @@
 
     <v-spacer></v-spacer>
 
-    <v-avatar color="primary" size="36">
+    <v-avatar color="primary" size="36" @click="login()">
       <v-icon dark> mdi-account-circle </v-icon>
     </v-avatar>
   </v-app-bar>
@@ -18,6 +18,11 @@ export default {
     title: {
       default: 'title',
       type: String,
+    },
+  },
+  methods: {
+    login() {
+      this.$signInWithGoogle()
     },
   },
 }

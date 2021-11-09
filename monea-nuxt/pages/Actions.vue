@@ -39,6 +39,7 @@
 
 <script>
 export default {
+
   data: () => ({
     actions: [
       {

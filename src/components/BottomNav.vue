@@ -16,6 +16,12 @@
 
         <v-icon>mdi-menu</v-icon>
       </v-btn>
+
+      <v-btn to="/heatmap" icon style="height: 100%">
+        <span>Actions</span>
+
+        <v-icon>mdi-menu</v-icon>
+      </v-btn>
     </v-bottom-navigation>
   </div>
 </template>

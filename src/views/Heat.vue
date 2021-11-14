@@ -101,7 +101,7 @@ export default {
           }),
         },
         {
-          name: '6',
+          name: '10',
           data: this.generateData(6, {
             min: 0,
             max: 90,

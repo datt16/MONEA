@@ -43,7 +43,7 @@ export default {
 
   firebase: {
     config: {
-      apiKey: 'AIzaSyDhr1HHsWpWWPiFy8aPEjJ0OgsqHfvIYbU',
+      apiKey: process.env.API_KEY,
       authDomain: 'monea-8247b.firebaseapp.com',
       projectId: 'monea-8247b',
       storageBucket: 'monea-8247b.appspot.com',
@@ -53,8 +53,9 @@ export default {
     },
     services: {
       auth: {
+        persistence: 'local',
         initialize: {
-          onAuthStateChangedMutation: 'setUser', // ... 1
+          onAuthStateChangedAction: 'auth/onAuthStateChanged', // ... 1
         },
       },
     },

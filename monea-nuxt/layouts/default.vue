@@ -20,5 +20,6 @@ export default {
       nav: 1,
     }
   },
+  // middleware: 'auth',
 }
 </script>

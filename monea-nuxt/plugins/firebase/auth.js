@@ -4,11 +4,10 @@ const signInGoogle = (context) => {
   context.app.$fire.auth
     .signInWithPopup(provider)
     .then((result) => {
-      return context.redirect('/actions')
     })
     .catch((error) => {
       // eslint-disable-next-line no-console
-      console.log(error)
+      console.error(error)
     })
 }
 

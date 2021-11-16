@@ -1,9 +1,7 @@
 <template>
   <div id="chart-view">
     <v-card min-width="350px" min-height="200px" outline>
-      <v-card-text 
-      class="text-center text-h5 black--text"
-      >
+      <v-card-text class="text-center text-h5 black--text">
         二酸化炭素濃度の推移
       </v-card-text>
       <v-sheet
@@ -12,7 +10,7 @@
         elevation="12"
         max-width="calc(100% - 32px)"
       >
-        <v-sparkline 
+        <v-sparkline
           :labels="labels"
           class="body-2"
           color="black"
@@ -32,12 +30,10 @@
       </v-sheet>
 
       <v-card-text class="pt-0">
-       <div class="text-body-2 greydarken-1--text">
-        <v-icon small>
-          mdi-clock
-        </v-icon>          
-         過去00分間の推移を表示（00分間隔）
-       </div>
+        <div class="text-body-2 greydarken-1--text">
+          <v-icon small> mdi-clock </v-icon>
+          過去00分間の推移を表示（00分間隔）
+        </div>
       </v-card-text>
     </v-card>
   </div>
@@ -48,7 +44,7 @@ const gradients = [
   ['#222'],
   ['#42b3f4'],
   ['red', 'orange', 'yellow'],
-  ['darkblue','aquamarine'],
+  ['darkblue', 'aquamarine'],
   ['#00c6ff', '#F0F', '#FF0'],
   ['#f72047', '#ffd200', '#1feaea'],
 ]
@@ -61,8 +57,18 @@ export default {
     padding: 13,
     lineCap: 'round',
     gradient: gradients[3],
-    labels: ['00:00','00:00','00:00','00:00','00:00','00:00','00:00','00:00','00:00',],
-    value: [390,340,350,370,390,400,450,390,440],
+    labels: [
+      '00:00',
+      '00:00',
+      '00:00',
+      '00:00',
+      '00:00',
+      '00:00',
+      '00:00',
+      '00:00',
+      '00:00',
+    ],
+    value: [390, 340, 350, 370, 390, 400, 450, 390, 440],
     gradientDirection: 'top',
     gradients,
     fill: false,

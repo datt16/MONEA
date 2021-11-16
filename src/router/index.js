@@ -20,6 +20,11 @@ const routes = [
     name: 'Action',
     component: () => import('@/views/Act.vue'),
   },
+  {
+    path: '/heatmap',
+    name: 'Heatmap',
+    component: () => import('@/views/Heat.vue'),
+  },
 ]
 
 const router = new VueRouter({

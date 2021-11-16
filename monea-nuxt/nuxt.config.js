@@ -44,12 +44,12 @@ export default {
   firebase: {
     config: {
       apiKey: process.env.API_KEY,
-      authDomain: 'monea-8247b.firebaseapp.com',
-      projectId: 'monea-8247b',
-      storageBucket: 'monea-8247b.appspot.com',
-      messagingSenderId: '334720942370',
-      appId: '1:334720942370:web:00cb962bc1af6ca6c3657b',
-      measurementId: 'G-F8VWWK5X61',
+      authDomain: process.env.AUTH_DOMAIN,
+      projectId: process.env.PROJECT_ID,
+      storageBucket: process.env.STORAGE_BUCKET,
+      messagingSenderId: process.env.MESSAGING_SENDER_ID,
+      appId: process.env.APP_ID,
+      measurementId: process.env.MEASUREMENT_ID,
     },
     services: {
       auth: {
@@ -72,7 +72,7 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
       themes: {
         dark: {
           primary: colors.blue.darken2,

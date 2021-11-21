@@ -12,17 +12,20 @@ export const getters = {
 }
 
 export const actions = {
+  // onAuthStateChanged: ログイン状態が変わったとき
   async onAuthStateChanged({ commit }, { authUser, claims }) {
+    // ログアウト時
     if (!authUser) {
-      // ログアウトしたらページ遷移します
-      await this.$router.push('/login')
-      commit('RESET_STORE')
+      if (this.$router.path !== '/') {
+        await this.$router.push('/')
+      }
+      commit('RESET_STORE') // ストア初期化
       return
     }
 
+    // ログイン時
     if (authUser && claims) {
       try {
-        // ログインしたらページ遷移します
         await this.$router.push('/')
       } catch (e) {
         // eslint-disable-next-line no-console
@@ -35,10 +38,11 @@ export const actions = {
 }
 
 export const mutations = {
+  // RESET_STORE: authストアをリセット
   RESET_STORE(state) {
-    // user を空にするやつ
     state.user = null
   },
+  // SET_USER: USERをセット
   SET_USER(state, { authUser }) {
     if (!authUser) {
       state.user = null

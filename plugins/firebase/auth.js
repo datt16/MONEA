@@ -13,7 +13,6 @@ const signInGoogle = (context) => {
 
 const signOut = (context) => {
   context.app.$fire.auth.signOut() // ... 1
-  return context.redirect('/') // ... 2
 }
 
 export default (context, inject) => {

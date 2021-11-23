@@ -13,23 +13,22 @@ export const getters = {
 
 export const actions = {
   // onAuthStateChanged: ログイン状態が変わったとき
-  async onAuthStateChanged({ commit }, { authUser, claims }) {
+  onAuthStateChanged({ commit }, { authUser, claims }) {
     // ログアウト時
     if (!authUser) {
-      if (this.$router.path !== '/') {
-        await this.$router.push('/')
-      }
+      console.log("!authUser")
       commit('RESET_STORE') // ストア初期化
+      if (this.$router.path !== '/') {
+        this.$router.push('/')
+      }
       return
     }
 
     // ログイン時
     if (authUser && claims) {
-      try {
-        await this.$router.push('/')
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e)
+      console.log('authUser')
+      if (this.$router.path !== '/') {
+        this.$router.push('/')
       }
     }
 

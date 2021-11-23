@@ -10,7 +10,7 @@
           </div>
         </div>
       </v-card>
-      <v-card class="mt-2" min-width="300px" outlined>
+      <v-card class="mt-2" min-width="300px" outlined @click="__test()">
         <div class="pa-5 d-flex align-center">
           <v-icon size="40" color="blue">mdi-open-in-new</v-icon>
           <div class="d-flex flex-column ml-5">
@@ -39,7 +39,6 @@
 
 <script>
 export default {
-
   data: () => ({
     actions: [
       {
@@ -62,5 +61,12 @@ export default {
       },
     ],
   }),
+  methods: {
+    __test() {
+      this.$store.dispatch('record/getRecordData').then(() => {
+        console.log('[##] 完了')
+      })
+    },
+  },
 }
 </script>

@@ -16,7 +16,6 @@ export const actions = {
   onAuthStateChanged({ commit }, { authUser, claims }) {
     // ログアウト時
     if (!authUser) {
-      console.log("!authUser")
       commit('RESET_STORE') // ストア初期化
       if (this.$router.path !== '/') {
         this.$router.push('/')
@@ -26,7 +25,6 @@ export const actions = {
 
     // ログイン時
     if (authUser && claims) {
-      console.log('authUser')
       if (this.$router.path !== '/') {
         this.$router.push('/')
       }

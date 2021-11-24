@@ -5,7 +5,7 @@ export const state = () => ({
 
 export const getters = {
   records(state) {
-    return state.user
+    return state.records
   },
   sensors(state) {
     return state.sensors
@@ -13,25 +13,21 @@ export const getters = {
 }
 
 export const actions = {
-  async getRecordData({ state }) {
-    // const dburl = 'v1/records/sensorId/' + state.sensors[0]
+  async getRecordData({ commit }) {
     const rootRef = this.$fire.database.ref()
     try {
       await rootRef
         .child('v1')
+        .child('records')
+        .child('sensorId')
+        .child('HANDSON')
         .get()
         .then((snapshot) => {
           if (snapshot.exists()) {
-            console.log(snapshot.val())
-          } else {
-            console.log('No data')
+            const data = snapshot.val()
+            commit('SET_RECORD', data)
           }
         })
-      // .orderByValue()
-      // .limitToFirst(10)
-      // .on('value', (snapshot) => {
-      //   console.log("データ取得 : ", snapshot.val())
-      // })
     } catch (e) {
       alert(e)
     }
@@ -44,5 +40,10 @@ export const mutations = {
     state.records = null
   },
   // SET_USER: USERをセット
-  SET_RECORD(state, { record }) {},
+  SET_RECORD(state, record) {
+    state.records = Object.entries(record.records).map(([date, value]) => ({
+      ...value,
+      date,
+    }))
+  },
 }

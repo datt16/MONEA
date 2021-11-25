@@ -2,7 +2,7 @@
 
 ## デプロイ先
 
-https://monea-preview1.web.app/
+
 
 ## 機能詳細
 

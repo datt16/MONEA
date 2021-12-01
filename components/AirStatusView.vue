@@ -11,28 +11,26 @@
     </v-card-title>
     <v-card-text>
       <v-row dense>
-        <v-col cols="1" align-self="center">
+        <div class="d-flex align-center justify-center">
           <v-icon
             size="18"
             :color="theme.color"
+            class="px-2"
             v-text="theme.subIcon"
           ></v-icon>
-        </v-col>
-        <v-col>
           <span class="text-subtitle-1">{{ co2InfoText }}</span>
-        </v-col>
+        </div>
       </v-row>
       <v-row v-if="isSensorProblem" dense>
-        <v-col cols="1" align-self="center">
+        <div class="d-flex align-center justify-center">
           <v-icon
             size="18"
             :color="theme.color"
+            class="px-2"
             v-text="theme.subIcon"
           ></v-icon>
-        </v-col>
-        <v-col>
           <span class="text-subtitle-1">センサー正常稼働中</span>
-        </v-col>
+        </div>
       </v-row>
     </v-card-text>
   </v-card>
@@ -42,7 +40,7 @@
 export default {
   data() {
     return {
-      co2: 900,
+      co2: 1500,
       isSensorProblem: false,
       themeSet: {
         Normal: {

@@ -1,68 +1,23 @@
 <template>
-  <v-card class="pt-8" tile min-width="350px" min-height="200px" color="white">
-    <div v-if="ventilation === 1">
-      <div class="pt-2">
-        <p class="text-h5 text-center font-weight-bold">
-          適切に換気されています
-        </p>
-      </div>
-    </div>
-    <div v-else>
-      <div class="pt-2">
-        <p class="text-h5 text-center font-weight-bold">換気が必要です</p>
-      </div>
-    </div>
-
-    <div v-if="sensor === 4">
-      <div>
-        <div class="my-2">
-          <p class="text-subtitle-1 text-center">4/4 センサー異常なし</p>
-        </div>
-      </div>
-    </div>
-    <div v-else-if="sensor === 3">
-      <div>
-        <div class="my-2">
-          <p class="text-subtitle-1 text-center">3/4 センサー異常あり</p>
-        </div>
-      </div>
-    </div>
-    <div v-else-if="sensor === 2">
-      <div>
-        <div class="my-2">
-          <p class="text-subtitle-1 text-center">2/4 センサー異常あり</p>
-        </div>
-      </div>
-    </div>
-    <div v-else-if="sensor === 1">
-      <div>
-        <div class="my-2">
-          <p class="text-subtitle-1 text-center">1/4 センサー異常あり</p>
-        </div>
-      </div>
-    </div>
-    <div v-else>
-      <div>
-        <div class="my-2">
-          <p class="text-subtitle-1 text-center">0/4 センサー異常あり</p>
-        </div>
-      </div>
-    </div>
-
-    <div v-if="average >= 600">
-      <div>
-        <div class="pb-2">
-          <p class="text-subtitle-1 text-center">平均CO2濃度 600以上</p>
-        </div>
-      </div>
-    </div>
-    <div v-else>
-      <div>
-        <div class="pb-2">
-          <p class="text-subtitle-1 text-center">平均CO2濃度 600未満</p>
-        </div>
-      </div>
-    </div>
+  <v-card outlined min-width="350px">
+    <v-card-title>
+      <v-icon size="36" color="success" class="pr-3 py-2">mdi-check</v-icon>
+      <span class="text-h6 font-weight-bold"> 適切に換気されています </span>
+    </v-card-title>
+    <v-card-text>
+      <v-row dense>
+        <v-col align-center="stretch">
+          <v-icon size="12" color="success" class="pr-1">mdi-circle</v-icon>
+          <span class="text-subtitle text-center">平均CO2濃度 600未満 </span>
+        </v-col>
+      </v-row>
+      <v-row dense>
+        <v-col align-center="stretch">
+          <v-icon size="12" color="success" class="pr-1">mdi-circle</v-icon>
+          <span class="text-subtitle text-center">センサー正常稼働中</span>
+        </v-col>
+      </v-row>
+    </v-card-text>
   </v-card>
 </template>
 

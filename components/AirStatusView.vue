@@ -22,7 +22,7 @@
           <span class="text-subtitle-1">{{ co2InfoText }}</span>
         </v-col>
       </v-row>
-      <v-row dense>
+      <v-row v-if="isSensorProblem" dense>
         <v-col cols="1" align-self="center">
           <v-icon
             size="18"
@@ -42,9 +42,8 @@
 export default {
   data() {
     return {
-      ventilation: 0,
-      sensor: 4,
-      average: 500,
+      co2: 900,
+      isSensorProblem: false,
       themeSet: {
         Normal: {
           bgColor: null,
@@ -65,13 +64,15 @@ export default {
   },
   computed: {
     theme() {
-      return this.themeSet.Normal
+      return this.co2 < 1000 ? this.themeSet.Normal : this.themeSet.UnNormal
     },
     mainInfoText() {
-      return '適切に換気されています。'
+      return this.co2 < 1000
+        ? '適切に換気されています。'
+        : '換気が不足しています。'
     },
     co2InfoText() {
-      return '平均CO2濃度 600未満'
+      return this.co2 < 1000 ? '平均CO2濃度 1000未満' : '平均CO2濃度 1000以上'
     },
   },
 }

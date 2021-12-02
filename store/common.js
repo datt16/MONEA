@@ -16,7 +16,7 @@ export const actions = {
         .child('v1')
         .child('rooms')
         .child('roomId')
-        .child('TEST_ROOM')
+        .child('TEST_ROOM') // roomIdを入力
         .get()
         .then((snapshot) => {
           const data = snapshot.val()

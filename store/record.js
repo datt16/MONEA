@@ -1,6 +1,6 @@
 export const state = () => ({
   sensors: ['HADSON'],
-  records: null,
+  records: {},
 })
 
 export const getters = {
@@ -13,19 +13,18 @@ export const getters = {
 }
 
 export const actions = {
-  async getRecordData({ commit }) {
-    const rootRef = this.$fire.database.ref()
+  async getRecordData({ commit }, { sensorId }) {
+    const rootRef = this.$fire.database.ref(
+      `v1/records/sensorId/${sensorId}/records`
+    )
     try {
       await rootRef
-        .child('v1')
-        .child('records')
-        .child('sensorId')
-        .child('HANDSON')
-        .get()
-        .then((snapshot) => {
+        // .orderByChild('created')
+        .limitToLast(10)
+        .once('value', (snapshot) => {
           if (snapshot.exists()) {
             const data = snapshot.val()
-            commit('SET_RECORD', data)
+            commit('SET_RECORD', { record: data, sensorId })
           }
         })
     } catch (e) {
@@ -39,11 +38,14 @@ export const mutations = {
   RESET_STORE(state) {
     state.records = null
   },
-  // SET_USER: USERをセット
-  SET_RECORD(state, record) {
-    state.records = Object.entries(record.records).map(([date, value]) => ({
-      ...value,
-      date,
-    }))
+  // SET_RECORD: RECORDをセット
+  SET_RECORD(state, { record, sensorId }) {
+    state.records = {
+      ...state.records,
+      [sensorId]: Object.entries(record).map(([date, value]) => ({
+        ...value,
+        date,
+      })),
+    }
   },
 }

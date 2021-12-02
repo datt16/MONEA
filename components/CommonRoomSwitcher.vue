@@ -22,8 +22,8 @@
             <v-list-item-title> 4J教室 </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link>
-          <v-icon left dense @click="getRoom()">mdi-sync</v-icon>
+        <v-list-item @click="getRoom()">
+          <v-icon left dense>mdi-sync</v-icon>
           <v-list-item-content>
             <v-list-item-title> [DEBUG] common/getRoomData </v-list-item-title>
           </v-list-item-content>
@@ -47,10 +47,12 @@ export default {
   },
   methods: {
     getData() {
-      this.$store.dispatch('record/getRecordData')
+      this.$store.dispatch('record/getRecordData', {
+        sensorId: this.roomData.sensors[0],
+      })
     },
     getRoom() {
-      alert("部屋データ取得")
+      alert('部屋データ取得')
       this.$store.dispatch('common/getRoomData')
     },
   },

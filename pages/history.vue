@@ -2,7 +2,6 @@
   <v-row no-gutters>
     <v-col cols="12">
       <div class="example">
-        
         <v-row>
           <v-col>
             <v-data-table
@@ -48,7 +47,11 @@ export default {
   computed: {
     records() {
       const data = this.$store.getters['record/records']
-      return data || []
+      const room = this.$store.getters['common/room']
+
+      if (!room) return []
+
+      return data[room.sensors[0]] || []
     },
   },
 }

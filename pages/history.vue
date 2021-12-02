@@ -4,6 +4,34 @@
       <div class="example">
         <v-row>
           <v-col>
+            <v-menu offset-y>
+              <template #activator="{ on, attrs }">
+                <v-btn
+                  depressed
+                  color="transparent"
+                  class="px-4"
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <div class="text-h6">
+                    <span class="font-weight-bold mr-1"
+                      >モニタリングデータ</span
+                    >
+                    <span class="text-button">{{ current }}</span>
+                  </div>
+                  <v-icon>mdi-menu-down</v-icon>
+                </v-btn>
+              </template>
+              <v-list v-for="(id, index) in sensors" :key="index">
+                <v-list-item link @click="switchSensor(id)">
+                  <v-icon left dense>mdi-home</v-icon>
+                  <v-list-item-content>
+                    <v-list-item-title>{{ id }}</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+            </v-menu>
+
             <v-data-table
               disable-sort
               hide-default-footer
@@ -45,13 +73,20 @@ export default {
     ],
   }),
   computed: {
+    sensors() {
+      return this.$store.getters['common/sensors']
+    },
+    current() {
+      return this.$store.getters['common/currentSensor']
+    },
     records() {
       const data = this.$store.getters['record/records']
-      const room = this.$store.getters['common/room']
-
-      if (!room) return []
-
-      return data[room.sensors[0]] || []
+      return data[this.current] || []
+    },
+  },
+  methods: {
+    switchSensor(id) {
+      this.$store.commit('common/SET_CURRENT_SENSOR', { id })
     },
   },
 }

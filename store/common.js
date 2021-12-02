@@ -1,27 +1,30 @@
 export const state = () => ({
   room: null,
+  currentSensor: null,
 })
 
 export const getters = {
   room(state) {
     return state.room
   },
+  sensors(state) {
+    return state.room.sensors
+  },
+  currentSensor(state) {
+    return state.currentSensor
+  },
 }
 
 export const actions = {
   async getRoomData({ commit }) {
-    const rootRef = this.$fire.database.ref()
+    const ref = this.$fire.database.ref('v1/rooms/roomId/TEST_ROOM')
     try {
-      await rootRef
-        .child('v1')
-        .child('rooms')
-        .child('roomId')
-        .child('TEST_ROOM') // roomIdを入力
-        .get()
-        .then((snapshot) => {
-          const data = snapshot.val()
-          commit('SET_ROOM', data)
-        })
+      await ref.once('value', (snapshot) => {
+        const data = snapshot.val()
+        if (snapshot.exists()) {
+          commit('SET_ROOM', { data })
+        }
+      })
     } catch (e) {
       alert('[Action] COMMON/getRoomData\n', e)
     }
@@ -29,7 +32,11 @@ export const actions = {
 }
 
 export const mutations = {
-  SET_ROOM(state, data) {
+  SET_ROOM(state, { data }) {
     state.room = data
+    state.currentSensor = data.sensors[0]
+  },
+  SET_CURRENT_SENSOR(state, { id }) {
+    state.currentSensor = id
   },
 }

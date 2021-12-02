@@ -22,7 +22,7 @@
             <v-list-item-title> 4J教室 </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item @click="getRoom()">
+        <v-list-item>
           <v-icon left dense>mdi-sync</v-icon>
           <v-list-item-content>
             <v-list-item-title> [DEBUG] common/getRoomData </v-list-item-title>
@@ -31,9 +31,6 @@
       </v-list>
     </v-menu>
     <v-spacer />
-    <v-btn dark depressed color="grey darken-2" @click="getData"
-      >データ取得</v-btn
-    >
   </v-toolbar>
 </template>
 
@@ -45,16 +42,6 @@ export default {
       return data
     },
   },
-  methods: {
-    getData() {
-      this.$store.dispatch('record/getRecordData', {
-        sensorId: this.roomData.sensors[0],
-      })
-    },
-    getRoom() {
-      alert('部屋データ取得')
-      this.$store.dispatch('common/getRoomData')
-    },
-  },
+  methods: {},
 }
 </script>

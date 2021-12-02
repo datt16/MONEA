@@ -7,9 +7,6 @@ export const getters = {
   room(state) {
     return state.room
   },
-  sensors(state) {
-    return state.room.sensors
-  },
   currentSensor(state) {
     return state.currentSensor
   },

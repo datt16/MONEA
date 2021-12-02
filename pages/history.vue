@@ -39,6 +39,8 @@
               :headers="headers"
               :items="records"
             ></v-data-table>
+
+            <v-btn depressed @click="test()">TEST</v-btn>
           </v-col>
         </v-row>
       </div>
@@ -74,7 +76,7 @@ export default {
   }),
   computed: {
     sensors() {
-      return this.$store.getters['common/sensors']
+      return this.$store.getters['record/recordKeys']
     },
     current() {
       return this.$store.getters['common/currentSensor']
@@ -87,6 +89,9 @@ export default {
   methods: {
     switchSensor(id) {
       this.$store.commit('common/SET_CURRENT_SENSOR', { id })
+    },
+    test() {
+      this.$store.commit('record/CALC_AVG')
     },
   },
 }

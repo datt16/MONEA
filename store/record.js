@@ -1,5 +1,6 @@
 export const state = () => ({
   records: {},
+  recordCnt: 18,
 })
 
 export const getters = {
@@ -9,17 +10,22 @@ export const getters = {
   recordKeys(state) {
     return Object.keys(state.records)
   },
+  currentRecord(state) {
+    return state.records.avg.filter((_, i) => {
+      return i >= state.recordCnt - 1
+    })
+  },
 }
 
 export const actions = {
-  async getRecordData({ commit }, { sensorId }) {
+  async getRecordData({ commit, state }, { sensorId }) {
     const rootRef = this.$fire.database.ref(
       `v1/records/sensorId/${sensorId}/records`
     )
     try {
       await rootRef
         // .orderByChild('created')
-        .limitToLast(10)
+        .limitToLast(state.recordCnt)
         .once('value', (snapshot) => {
           if (snapshot.exists()) {
             const data = snapshot.val()
@@ -51,10 +57,9 @@ export const mutations = {
   // CALC_AVG: 各センサーの値から部屋全体の計測値の平均を求める
   CALC_AVG(state) {
     // TODO: 時間がずれていた時、どのようにして対応するか考える
-    const avgArray = state.records.HANDSON.map((_, index) => {
-      return avg(state.records.HANDSON[index], state.records.HANDSON2[index])
+    const avgArray = state.records.HANDSON.map((record, i) => {
+      return calcRecordAvg(record, state.records.HANDSON[i])
     })
-
     state.records = {
       ...state.records,
       avg: avgArray,
@@ -62,7 +67,7 @@ export const mutations = {
   },
 }
 
-const avg = (data1, data2) => {
+const calcRecordAvg = (data1, data2) => {
   const res = {}
   res.date = data1.date
   res.co2 = (data1.co2 + data2.co2) / 2

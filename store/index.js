@@ -5,8 +5,10 @@ export const actions = {
 
     // センサーの値取ってくる
     const sensors = context.getters['common/room'].sensors
-    await sensors.map((sensor) =>
-      context.dispatch('record/getRecordData', { sensorId: sensor })
-    )
+
+    for (let i = 0; i < sensors.length; i++) {
+      await context.dispatch('record/getRecordData', { sensorId: sensors[i] })
+    }
+    context.commit('record/CALC_AVG')
   },
 }

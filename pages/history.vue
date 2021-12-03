@@ -40,6 +40,19 @@
               :items="records"
             ></v-data-table>
 
+            <div class="text-h6 pt-4">
+              <span class="font-weight-bold mr-1">最新のデータ</span>
+              <span class="text-button">current</span>
+            </div>
+
+            <v-data-table
+              disable-sort
+              hide-default-footer
+              dense
+              :headers="headers"
+              :items="currentRecord"
+            ></v-data-table>
+
             <v-btn depressed @click="test()">TEST</v-btn>
           </v-col>
         </v-row>
@@ -84,6 +97,10 @@ export default {
     records() {
       const data = this.$store.getters['record/records']
       return data[this.current] || []
+    },
+    currentRecord() {
+      const data = this.$store.getters['record/currentRecord']
+      return data || []
     },
   },
   methods: {

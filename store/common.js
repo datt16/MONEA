@@ -10,6 +10,7 @@ export const getters = {
   currentSensor(state) {
     return state.currentSensor
   },
+  currentRoom(state) {}
 }
 
 export const actions = {

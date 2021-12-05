@@ -35,25 +35,22 @@
             <v-data-table
               disable-sort
               hide-default-footer
-              dense
               :headers="headers"
               :items="records"
-            ></v-data-table>
+              :page.sync="page"
+            >
+              <template #[`item.co2`]="{ item }">
+                <v-chip :color="item.co2 > 1000 ? 'warning' : 'success'" dark>
+                  {{ item.co2 }}
+                </v-chip>
+              </template>
+            </v-data-table>
 
-            <div class="text-h6 pt-4">
-              <span class="font-weight-bold mr-1">最新のデータ</span>
-              <span class="text-button">current</span>
-            </div>
-
-            <v-data-table
-              disable-sort
-              hide-default-footer
-              dense
-              :headers="headers"
-              :items="currentRecord"
-            ></v-data-table>
-
-            <v-btn depressed @click="test()">TEST</v-btn>
+            <v-pagination
+              v-model="page"
+              :length="pageCount"
+              circle
+            ></v-pagination>
           </v-col>
         </v-row>
       </div>
@@ -63,6 +60,7 @@
 <script>
 export default {
   data: () => ({
+    page: 1,
     headers: [
       {
         text: 'date',
@@ -101,6 +99,10 @@ export default {
     currentRecord() {
       const data = this.$store.getters['record/currentRecord']
       return data || []
+    },
+    pageCount() {
+      const num = this.$store.getters['record/recordCnt']
+      return parseInt(num / 10) + 1
     },
   },
   methods: {

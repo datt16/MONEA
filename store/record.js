@@ -18,6 +18,9 @@ export const getters = {
   co2Array(state) {
     return state.records.avg.map((x) => ({ co2: x.co2, date: x.date }))
   },
+  recordCnt(state) {
+    return state.recordCnt
+  },
 }
 
 export const actions = {

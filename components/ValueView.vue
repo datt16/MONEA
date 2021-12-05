@@ -1,9 +1,10 @@
 <template>
   <v-card min-height="100px" outlined>
-    <p class="text-h7">二酸化炭素濃度(ppm)</p>
-    <center>
-      <p class="text-h2">{{ sensorppm }}</p>
-    </center>
+    <v-col>    
+      <p class="text-h7 text-center"><v-icon small>mdi-cloud</v-icon>二酸化炭素濃度</p>
+      <strong class="text-h3 font-weight-bold display-" >{{ sensorppm }}</strong>
+      <strong class="text-h5">ppm</strong>
+    </v-col>
   </v-card>
 </template>
 

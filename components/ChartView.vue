@@ -23,8 +23,8 @@
           :auto-line-width="autoLineWidth"
           auto-draw
         >
-          <template #label="labels">
-            {{ labels.value }}
+          <template #label="label">
+            {{ label.value }}
           </template>
         </v-sparkline>
       </v-sheet>
@@ -32,7 +32,7 @@
       <v-card-text class="pt-0">
         <div class="text-body-2 greydarken-1--text">
           <v-icon small> mdi-clock </v-icon>
-          過去{{ this.records.length * 10 }}分間の推移を表示（10分間隔）
+          過去{{ records.length * 10 }}分間の推移を表示（10分間隔）
         </div>
       </v-card-text>
     </v-card>

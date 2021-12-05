@@ -8,7 +8,12 @@
 
     <v-row dense>
       <v-col v-for="(head, index) in headers" :key="index" cols="6" md="3">
-        <value-view :title="head.text" :value="currentRecord[head.value]" />
+        <value-view
+          :type="head.type"
+          :title="head.text"
+          :icon="head.icon"
+          :value="currentRecord[head.value]"
+        />
       </v-col>
     </v-row>
 
@@ -25,20 +30,27 @@ export default {
   data: () => ({
     headers: [
       {
-        text: '二酸化炭素濃度(ppm)',
+        text: '二酸化炭素濃度',
         value: 'co2',
+        type: 'ppm',
+        icon: 'mdi-fan'
       },
       {
-        text: '気温(℃)',
+        text: '気温',
         value: 'temp',
+        type: '℃',
+        icon: 'mdi-temperature-celsius',
       },
       {
-        text: '湿度(%)',
+        text: '湿度',
         value: 'humid',
+        type: '%',
+        icon: 'mdi-water'
       },
       {
-        text: '気圧(hPa)',
+        text: '気圧',
         value: 'pressure',
+        type: 'hPa',
       },
     ],
   }),

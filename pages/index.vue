@@ -14,7 +14,7 @@
 
     <v-row class="py-2" no-gutters>
       <v-col cols="12">
-        <chart-view />
+        <chart-view :records="co2ChartData" />
       </v-col>
     </v-row>
   </div>
@@ -45,6 +45,9 @@ export default {
   computed: {
     currentRecord() {
       return this.$store.getters['record/currentRecord'][0]
+    },
+    co2ChartData() {
+      return this.$store.getters['record/co2Array']
     },
   },
 }

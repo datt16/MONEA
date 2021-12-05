@@ -1,7 +1,7 @@
 <template>
   <div id="chart-view">
-    <v-card min-width="350px" min-height="200px" outline>
-      <v-card-text class="text-center text-h5 black--text">
+    <v-card min-width="350px" min-height="200px" outlined>
+      <v-card-text class="text-center text-h5">
         二酸化炭素濃度の推移
       </v-card-text>
       <v-sheet
@@ -11,28 +11,28 @@
         max-width="calc(100% - 32px)"
       >
         <v-sparkline
-          :labels="labels"
           class="body-2"
           color="black"
           :value="value"
+          :labels="labels"
           :gradient="gradient"
-          :smooth="radius || false"
           :padding="padding"
           :line-width="width"
           :stroke-linecap="lineCap"
           :gradient-direction="gradientDirection"
-          :fill="fill"
-          :type="type"
           :auto-line-width="autoLineWidth"
           auto-draw
         >
+          <template #label="labels">
+            {{ labels.value }}
+          </template>
         </v-sparkline>
       </v-sheet>
 
       <v-card-text class="pt-0">
         <div class="text-body-2 greydarken-1--text">
           <v-icon small> mdi-clock </v-icon>
-          過去00分間の推移を表示（00分間隔）
+          過去{{ this.records.length * 10 }}分間の推移を表示（10分間隔）
         </div>
       </v-card-text>
     </v-card>
@@ -51,29 +51,38 @@ const gradients = [
 
 export default {
   name: 'ChartView',
+  props: {
+    records: {
+      type: Array,
+      default: () => [],
+    },
+  },
   data: () => ({
     width: 2,
     radius: 0,
     padding: 13,
     lineCap: 'round',
     gradient: gradients[3],
-    labels: [
-      '00:00',
-      '00:00',
-      '00:00',
-      '00:00',
-      '00:00',
-      '00:00',
-      '00:00',
-      '00:00',
-      '00:00',
-    ],
-    value: [390, 340, 350, 370, 390, 400, 450, 390, 440],
     gradientDirection: 'top',
     gradients,
     fill: false,
     type: 'trend',
     autoLineWidth: false,
   }),
+  computed: {
+    labels() {
+      return this.records.map((x, i) => {
+        if (i === this.records.length - 1) return x.date.substr(-5)
+        if (i % 6 === 0) {
+          return x.date.substr(-5)
+        } else {
+          return ' '
+        }
+      })
+    },
+    value() {
+      return this.records.map((x) => x.co2)
+    },
+  },
 }
 </script>

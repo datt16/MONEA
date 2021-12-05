@@ -18,13 +18,21 @@
     </v-card-title>
 
     <v-col v-if="$vuetify.breakpoint.xs">
-      <strong class="text-h3 font-weight-bold">{{ value }}</strong>
-      <span v-if="type.length >= 3" class="text-subtitle-2">{{ type }}</span>
-      <span v-else class="text-h6">{{ type }}</span>
+      <strong :class="`text-h3 font-weight-bold ${theme.bgColor}--text`">{{
+        value
+      }}</strong>
+      <span
+        v-if="type.length >= 3"
+        :class="`text-subtitle-2 ${theme.bgColor}--text`"
+        >{{ type }}</span
+      >
+      <span v-else :class="`text-h6 ${theme.bgColor}--text`">{{ type }}</span>
     </v-col>
     <v-col v-else>
-      <strong class="text-h3 font-weight-bold">{{ value }}</strong>
-      <span class="text-h5">{{ type }}</span>
+      <strong :class="`text-h3 font-weight-bold ${theme.bgColor}--text`">{{
+        value
+      }}</strong>
+      <span :class="`text-h5 ${theme.bgColor}--text`">{{ type }}</span>
     </v-col>
   </v-card>
 </template>
@@ -47,6 +55,26 @@ export default {
     icon: {
       type: String,
       default: 'mdi-cloud',
+    },
+  },
+  data: () => ({
+    themeSet: {
+      Normal: {
+        bgColor: null,
+        dark: null,
+      },
+      UnNormal: {
+        bgColor: 'warning',
+        dark: true,
+      },
+    },
+  }),
+  computed: {
+    theme() {
+      if (this.type === 'ppm') {
+        return this.value < 1000 ? this.themeSet.Normal : this.themeSet.UnNormal
+      }
+      return this.themeSet.Normal
     },
   },
 }

@@ -38,9 +38,14 @@
 
 <script>
 export default {
+  props: {
+    co2: {
+      type: Number,
+      default: 1900,
+    },
+  },
   data() {
     return {
-      co2: 1500,
       isSensorProblem: false,
       themeSet: {
         Normal: {

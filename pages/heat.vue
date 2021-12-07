@@ -26,7 +26,7 @@ export default {
       const a = [];
       for (let i = 0; i < 6; ++i) {
         const b = [];
-        for (let j = 0; j < 10; ++j) {
+        for (let j = 0; j < 11; ++j) {
           const v = Math.random();
           const m = {
             value: v,
@@ -55,15 +55,15 @@ export default {
 
 <style lang="scss" scoped>
 .root {
-  margin-left: 30px;
-  margin-right: 5px;
-  margin-top: 40px;
+  margin-left: 19px;
+  margin-right: 18px;
+  margin-top: 25px;
   display: flex;
   justify-content: center;
 }
 .row {
-  width: 50px;
-  padding: 1px; 
+  width: 30px; 
+  margin: 0px;
 }
 .col {
   width: 50px;

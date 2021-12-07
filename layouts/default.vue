@@ -3,7 +3,7 @@
     <common-app-bar />
     <v-main>
       <v-container>
-        <common-room-switcher />
+      <common-room-switcher />
         <Nuxt />
       </v-container>
     </v-main>

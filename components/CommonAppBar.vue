@@ -6,13 +6,10 @@
 
     <v-spacer></v-spacer>
 
-    <!-- <v-avatar color="primary" size="36" @click="login()">
-      <v-icon dark> mdi-account-circle </v-icon>
-    </v-avatar> -->
     <span class="text-caption mr-2">{{
       user ? user.displayName : 'ログインしてません'
     }}</span>
-    <v-btn @click="act">{{ isAuth ? 'ログアウト' : 'ログイン' }}</v-btn>
+    <v-btn disabled @click="act">{{ isAuth ? 'ログアウト' : 'ログイン' }}</v-btn>
   </v-app-bar>
 </template>
 
@@ -20,7 +17,7 @@
 export default {
   props: {
     title: {
-      default: 'title',
+      default: 'ホーム',
       type: String,
     },
   },

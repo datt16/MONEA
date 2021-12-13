@@ -1,79 +1,82 @@
 <template>
-  <v-card class="pt-8" tile min-width="350px" min-height="200px" color="white">
-    <div v-if="ventilation === 1">
-      <div class="pt-2">
-        <p class="text-h5 text-center font-weight-bold">
-          適切に換気されています
-        </p>
-      </div>
-    </div>
-    <div v-else>
-      <div class="pt-2">
-        <p class="text-h5 text-center font-weight-bold">換気が必要です</p>
-      </div>
-    </div>
-
-    <div v-if="sensor === 4">
-      <div>
-        <div class="my-2">
-          <p class="text-subtitle-1 text-center">4/4 センサー異常なし</p>
+  <v-card :dark="theme.dark" :color="theme.bgColor" outlined min-width="350px">
+    <v-card-title>
+      <v-icon
+        size="36"
+        :color="theme.color"
+        class="pr-3 py-1"
+        v-text="theme.mainIcon"
+      ></v-icon>
+      <span class="text-h6 font-weight-bold">{{ mainInfoText }}</span>
+    </v-card-title>
+    <v-card-text>
+      <v-row dense>
+        <div class="d-flex align-center justify-center">
+          <v-icon
+            size="18"
+            :color="theme.color"
+            class="px-2"
+            v-text="theme.subIcon"
+          ></v-icon>
+          <span class="text-subtitle-1">{{ co2InfoText }}</span>
         </div>
-      </div>
-    </div>
-    <div v-else-if="sensor === 3">
-      <div>
-        <div class="my-2">
-          <p class="text-subtitle-1 text-center">3/4 センサー異常あり</p>
+      </v-row>
+      <v-row v-if="isSensorProblem" dense>
+        <div class="d-flex align-center justify-center">
+          <v-icon
+            size="18"
+            :color="theme.color"
+            class="px-2"
+            v-text="theme.subIcon"
+          ></v-icon>
+          <span class="text-subtitle-1">センサー正常稼働中</span>
         </div>
-      </div>
-    </div>
-    <div v-else-if="sensor === 2">
-      <div>
-        <div class="my-2">
-          <p class="text-subtitle-1 text-center">2/4 センサー異常あり</p>
-        </div>
-      </div>
-    </div>
-    <div v-else-if="sensor === 1">
-      <div>
-        <div class="my-2">
-          <p class="text-subtitle-1 text-center">1/4 センサー異常あり</p>
-        </div>
-      </div>
-    </div>
-    <div v-else>
-      <div>
-        <div class="my-2">
-          <p class="text-subtitle-1 text-center">0/4 センサー異常あり</p>
-        </div>
-      </div>
-    </div>
-
-    <div v-if="average >= 600">
-      <div>
-        <div class="pb-2">
-          <p class="text-subtitle-1 text-center">平均CO2濃度 600以上</p>
-        </div>
-      </div>
-    </div>
-    <div v-else>
-      <div>
-        <div class="pb-2">
-          <p class="text-subtitle-1 text-center">平均CO2濃度 600未満</p>
-        </div>
-      </div>
-    </div>
+      </v-row>
+    </v-card-text>
   </v-card>
 </template>
 
 <script>
 export default {
+  props: {
+    co2: {
+      type: Number,
+      default: 1900,
+    },
+  },
   data() {
     return {
-      ventilation: 0,
-      sensor: 4,
-      average: 500,
+      isSensorProblem: false,
+      themeSet: {
+        Normal: {
+          bgColor: null,
+          color: 'success',
+          dark: null,
+          mainIcon: 'mdi-check-circle',
+          subIcon: 'mdi-circle',
+        },
+        UnNormal: {
+          bgColor: 'warning',
+          color: null,
+          dark: true,
+          mainIcon: 'mdi-alert',
+          subIcon: 'mdi-alert-circle-outline',
+        },
+      },
     }
+  },
+  computed: {
+    theme() {
+      return this.co2 < 1000 ? this.themeSet.Normal : this.themeSet.UnNormal
+    },
+    mainInfoText() {
+      return this.co2 < 1000
+        ? '適切に換気されています。'
+        : '換気が不足しています。'
+    },
+    co2InfoText() {
+      return this.co2 < 1000 ? '平均CO2濃度 1000未満' : '平均CO2濃度 1000以上'
+    },
   },
 }
 </script>

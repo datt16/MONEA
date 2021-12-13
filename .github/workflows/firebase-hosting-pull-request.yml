@@ -21,5 +21,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_MONEA_8247B }}'
-          projectId: monea-8247b
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_MONEA_2021 }}'
+          projectId: monea-2021

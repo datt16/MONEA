@@ -10,22 +10,18 @@ export const getters = {
   currentSensor(state) {
     return state.currentSensor
   },
-  currentRoom(state) {}
+  currentRoom(state) {},
 }
 
 export const actions = {
   async getRoomData({ commit }) {
     const ref = this.$fire.database.ref('v1/rooms/roomId/TEST_ROOM')
-    try {
-      await ref.once('value', (snapshot) => {
-        const data = snapshot.val()
-        if (snapshot.exists()) {
-          commit('SET_ROOM', { data })
-        }
-      })
-    } catch (e) {
-      alert('[Action] COMMON/getRoomData\n', e)
-    }
+    await ref.once('value', (snapshot) => {
+      const data = snapshot.val()
+      if (snapshot.exists()) {
+        commit('SET_ROOM', { data })
+      }
+    })
   },
 }
 

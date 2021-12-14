@@ -49,7 +49,11 @@ export const actions = {
           if (snapshot.exists()) {
             const data = snapshot.val()
             commit('SET_RECORD', { record: data, sensorId })
-            commit('CALC_AVG')
+            // TODO: records未取得時の処理の追加
+            commit('CALC_AVG', {
+              dataA: state.records[Object.keys(state.records)[0]],
+              dataB: state.records[Object.keys(state.records)[1]],
+            })
           }
         })
     } catch (e) {
@@ -75,15 +79,16 @@ export const mutations = {
     }
   },
   // CALC_AVG: 各センサーの値から部屋全体の計測値の平均を求める
-  CALC_AVG(state) {
-    if (!state.records.HANDSON || !state.records.HANDSON2) {
+  CALC_AVG(state, { dataA, dataB }) {
+    if (!(dataA && dataB)) {
       state.records = { ...state.records }
       return
     }
 
-    const avgArray = state.records.HANDSON.map((record, i) => {
-      return calcRecordAvg(record, state.records.HANDSON[i])
+    const avgArray = dataA.map((record, i) => {
+      return calcRecordAvg(record, dataB[i])
     })
+    console.log(avgArray)
     state.records = {
       ...state.records,
       avg: avgArray,

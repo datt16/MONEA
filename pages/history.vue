@@ -119,9 +119,6 @@ export default {
     switchSensor(id) {
       this.$store.commit('common/SET_CURRENT_SENSOR', { id })
     },
-    test() {
-      this.$store.commit('record/CALC_AVG')
-    },
   },
 }
 </script>

@@ -11,6 +11,6 @@ export const actions = {
     for (let i = 0; i < sensors.length; i++) {
       await context.dispatch('record/getRecordData', { sensorId: sensors[i] })
     }
-    context.commit('record/CALC_AVG')
+    context.commit('record/CALC_AVG', {})
   },
 }

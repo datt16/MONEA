@@ -1,7 +1,10 @@
 export const actions = {
   nuxtClientInit: async (context) => {
     // 部屋の情報取ってくる
-    await context.dispatch('common/getRoomData')
+    // await context.dispatch('common/getRoomData')
+    await context.dispatch('common/getAllRoomsData')
+
+    context.commit('common/INIT')
 
     // センサーの値取ってくる
     const sensors = context.getters['common/room'].sensors

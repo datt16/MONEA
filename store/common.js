@@ -8,13 +8,15 @@ export const getters = {
   room(state) {
     return state.room
   },
+  rooms(state) {
+    return state.rooms
+  },
   room_keys(state) {
     return Object.keys(state.rooms)
   },
   currentSensor(state) {
     return state.currentSensor
   },
-  currentRoom(state) {},
 }
 
 export const actions = {
@@ -31,14 +33,18 @@ export const actions = {
       alert(e)
     }
   },
-  async getRoomData({ commit }) {
-    const ref = this.$fire.database.ref('v1/rooms/roomId/TEST_ROOM')
-    await ref.once('value', (snapshot) => {
-      const data = snapshot.val()
-      if (snapshot.exists()) {
-        commit('SET_ROOM', { data })
-      }
-    })
+  async switchRoom({ state, commit, dispatch }, { id }) {
+    commit('SWITCH_CURRENT_ROOM', { id })
+    const sensors = state.room.sensors
+    commit('record/RESET_STORE', null, { root: true })
+    for (let i = 0; i < sensors.length; i++) {
+      await dispatch(
+        'record/getRecordData',
+        { sensorId: sensors[i] },
+        { root: true }
+      )
+    }
+    commit('record/CALC_AVG', null, { root: true })
   },
 }
 
@@ -47,8 +53,8 @@ export const mutations = {
     state.currentRoom = Object.keys(state.rooms)[0]
     state.room = state.rooms[state.currentRoom]
   },
-  SET_ROOM_FROM_ID(state) {
-    state.room = state.rooms[state.currentRoom]
+  SWITCH_CURRENT_ROOM(state, { id }) {
+    state.room = state.rooms[id]
   },
   SET_ROOM(state, { data }) {
     state.room = data

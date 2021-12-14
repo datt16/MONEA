@@ -11,12 +11,25 @@ export const getters = {
     return Object.keys(state.records)
   },
   currentRecord(state) {
-    return state.records.avg.filter((_, i) => {
-      return i >= state.recordCnt - 1
-    })
+    if (state.records.avg) {
+      return state.records.avg.filter((_, i) => {
+        return i >= state.recordCnt - 1
+      })
+    } else {
+      return [
+        {
+          date: '0000-00-00_00:00',
+          co2: -255,
+          temp: -255,
+          pressure: -255,
+          humid: -255,
+        },
+      ]
+    }
   },
   co2Array(state) {
-    return state.records.avg.map((x) => ({ co2: x.co2, date: x.date }))
+    const data = state.records.avg
+    return data ? data.map((x) => ({ co2: x.co2, date: x.date })) : []
   },
   recordCnt(state) {
     return state.recordCnt
@@ -47,7 +60,7 @@ export const actions = {
 export const mutations = {
   // RESET_STORE: recordsストアをリセット
   RESET_STORE(state) {
-    state.records = null
+    state.records = {}
   },
   // SET_RECORD: RECORDをセット
   // TODO: 時間がずれていた時、どのようにして同期を行うか考える

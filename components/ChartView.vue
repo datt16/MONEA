@@ -81,7 +81,8 @@ export default {
       })
     },
     value() {
-      return this.records.map((x) => x.co2)
+      const data = this.records
+      return data ? data.map((x) => x.co2) : null
     },
   },
 }

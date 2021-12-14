@@ -45,10 +45,11 @@ export const actions = {
       await rootRef
         // .orderByChild('created')
         .limitToLast(state.recordCnt)
-        .once('value', (snapshot) => {
+        .on('value', (snapshot) => {
           if (snapshot.exists()) {
             const data = snapshot.val()
             commit('SET_RECORD', { record: data, sensorId })
+            commit('CALC_AVG')
           }
         })
     } catch (e) {
@@ -75,7 +76,11 @@ export const mutations = {
   },
   // CALC_AVG: 各センサーの値から部屋全体の計測値の平均を求める
   CALC_AVG(state) {
-    // TODO: 時間がずれていた時、どのようにして対応するか考える
+    if (!state.records.HANDSON || !state.records.HANDSON2) {
+      state.records = { ...state.records }
+      return
+    }
+
     const avgArray = state.records.HANDSON.map((record, i) => {
       return calcRecordAvg(record, state.records.HANDSON[i])
     })

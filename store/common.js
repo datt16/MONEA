@@ -52,9 +52,11 @@ export const mutations = {
   INIT(state) {
     state.currentRoom = Object.keys(state.rooms)[0]
     state.room = state.rooms[state.currentRoom]
+    state.currentSensor = state.room.sensors[0]
   },
   SWITCH_CURRENT_ROOM(state, { id }) {
     state.room = state.rooms[id]
+    state.currentSensor = state.room.sensors[0]
   },
   SET_ROOM(state, { data }) {
     state.room = data

@@ -1,6 +1,6 @@
 <template>
   <v-card :dark="theme.dark" :color="theme.bgColor" outlined min-width="350px">
-    <div v-if="this.co2 < 0">
+    <div v-if="co2 < 0">
       <v-skeleton-loader type="card" />
     </div>
     <div v-else>

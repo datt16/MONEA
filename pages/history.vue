@@ -33,14 +33,24 @@
             </v-menu>
 
             <v-data-table
-              disable-sort
               hide-default-footer
               :headers="headers"
               :items="records"
               :page.sync="page"
+              sort-by="date"
+              sort-desc=""
             >
               <template #[`item.co2`]="{ item }">
-                <v-chip :color="item.co2 > 1000 ? 'warning' : 'success'" dark>
+                <v-chip
+                  :color="
+                    item.co2 < 0
+                      ? 'grey'
+                      : item.co2 > 1000
+                      ? 'warning'
+                      : 'success'
+                  "
+                  dark
+                >
                   {{ item.co2 }}
                 </v-chip>
               </template>

@@ -1,7 +1,7 @@
 <template>
   <div id="chart-view">
     <v-card min-width="350px" min-height="200px" outlined>
-      <v-card-text class="text-center text-h5">
+      <v-card-text class="text-center text-h6 black--text">
         二酸化炭素濃度の推移
       </v-card-text>
       <v-sheet
@@ -30,7 +30,7 @@
       </v-sheet>
 
       <v-card-text class="pt-0">
-        <div class="text-body-2 greydarken-1--text">
+        <div class="text-body-2 grey--text text--darken-2">
           <v-icon small> mdi-clock </v-icon>
           過去{{ records.length * 10 }}分間の推移を表示（10分間隔）
         </div>

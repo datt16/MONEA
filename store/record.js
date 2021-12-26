@@ -11,12 +11,25 @@ export const getters = {
     return Object.keys(state.records)
   },
   currentRecord(state) {
-    return state.records.avg.filter((_, i) => {
-      return i >= state.recordCnt - 1
-    })
+    if (state.records.avg) {
+      return state.records.avg.filter((_, i) => {
+        return i >= state.recordCnt - 1
+      })
+    } else {
+      return [
+        {
+          date: '0000-00-00_00:00',
+          co2: -255,
+          temp: -255,
+          pressure: -255,
+          humid: -255,
+        },
+      ]
+    }
   },
   co2Array(state) {
-    return state.records.avg.map((x) => ({ co2: x.co2, date: x.date }))
+    const data = state.records.avg
+    return data ? data.map((x) => ({ co2: x.co2, date: x.date })) : []
   },
   recordCnt(state) {
     return state.recordCnt
@@ -32,10 +45,15 @@ export const actions = {
       await rootRef
         // .orderByChild('created')
         .limitToLast(state.recordCnt)
-        .once('value', (snapshot) => {
+        .on('value', (snapshot) => {
           if (snapshot.exists()) {
             const data = snapshot.val()
             commit('SET_RECORD', { record: data, sensorId })
+            // TODO: records未取得時の処理の追加
+            commit('CALC_AVG', {
+              dataA: state.records[Object.keys(state.records)[0]],
+              dataB: state.records[Object.keys(state.records)[1]],
+            })
           }
         })
     } catch (e) {
@@ -47,7 +65,7 @@ export const actions = {
 export const mutations = {
   // RESET_STORE: recordsストアをリセット
   RESET_STORE(state) {
-    state.records = null
+    state.records = {}
   },
   // SET_RECORD: RECORDをセット
   // TODO: 時間がずれていた時、どのようにして同期を行うか考える
@@ -61,11 +79,16 @@ export const mutations = {
     }
   },
   // CALC_AVG: 各センサーの値から部屋全体の計測値の平均を求める
-  CALC_AVG(state) {
-    // TODO: 時間がずれていた時、どのようにして対応するか考える
-    const avgArray = state.records.HANDSON.map((record, i) => {
-      return calcRecordAvg(record, state.records.HANDSON[i])
+  CALC_AVG(state, { dataA, dataB }) {
+    if (!(dataA && dataB)) {
+      state.records = { ...state.records }
+      return
+    }
+
+    const avgArray = dataA.map((record, i) => {
+      return calcRecordAvg(record, dataB[i])
     })
+    console.log(avgArray)
     state.records = {
       ...state.records,
       avg: avgArray,

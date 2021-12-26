@@ -1,39 +1,44 @@
 <template>
   <v-card min-height="100px" outlined>
-    <v-card-title
-      v-if="$vuetify.breakpoint.xs"
-      class="pb-0 pt-3 text-subtitle-1"
-    >
-      <v-icon small class="mr-2">{{ icon }}</v-icon>
-      <span>
-        {{ title }}
-      </span>
-    </v-card-title>
-
-    <v-card-title v-else class="pb-0 pt-3">
-      <v-icon class="mr-2">{{ icon }}</v-icon>
-      <span>
-        {{ title }}
-      </span>
-    </v-card-title>
-
-    <v-col v-if="$vuetify.breakpoint.xs">
-      <strong :class="`text-h3 font-weight-bold ${theme.bgColor}--text`">{{
-        value
-      }}</strong>
-      <span
-        v-if="type.length >= 3"
-        :class="`text-subtitle-2 ${theme.bgColor}--text`"
-        >{{ type }}</span
+    <div v-if="value < -250">
+      <v-skeleton-loader type="card" />
+    </div>
+    <div v-else>
+      <v-card-title
+        v-if="$vuetify.breakpoint.xs"
+        class="pb-0 pt-3 text-subtitle-1"
       >
-      <span v-else :class="`text-h6 ${theme.bgColor}--text`">{{ type }}</span>
-    </v-col>
-    <v-col v-else>
-      <strong :class="`text-h3 font-weight-bold ${theme.bgColor}--text`">{{
-        value
-      }}</strong>
-      <span :class="`text-h5 ${theme.bgColor}--text`">{{ type }}</span>
-    </v-col>
+        <v-icon small class="mr-2">{{ icon }}</v-icon>
+        <span>
+          {{ title }}
+        </span>
+      </v-card-title>
+
+      <v-card-title v-else class="pb-0 pt-3">
+        <v-icon class="mr-2">{{ icon }}</v-icon>
+        <span>
+          {{ title }}
+        </span>
+      </v-card-title>
+
+      <v-col v-if="$vuetify.breakpoint.xs">
+        <strong :class="`text-h3 font-weight-bold ${theme.bgColor}--text`">{{
+          value
+        }}</strong>
+        <span
+          v-if="type.length >= 3"
+          :class="`text-subtitle-2 ${theme.bgColor}--text`"
+          >{{ type }}</span
+        >
+        <span v-else :class="`text-h6 ${theme.bgColor}--text`">{{ type }}</span>
+      </v-col>
+      <v-col v-else>
+        <strong :class="`text-h3 font-weight-bold ${theme.bgColor}--text`">{{
+          value
+        }}</strong>
+        <span :class="`text-h5 ${theme.bgColor}--text`">{{ type }}</span>
+      </v-col>
+    </div>
   </v-card>
 </template>
 

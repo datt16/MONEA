@@ -18,7 +18,10 @@
     </v-row>
 
     <v-row class="py-2" no-gutters>
-      <v-col cols="12">
+      <v-col v-if="currentRecord.co2 < 0" cols="12">
+        <v-skeleton-loader type="card" />
+      </v-col>
+      <v-col v-else cols="12">
         <chart-view :records="co2ChartData" />
       </v-col>
     </v-row>
@@ -33,7 +36,7 @@ export default {
         text: '二酸化炭素濃度',
         value: 'co2',
         type: 'ppm',
-        icon: 'mdi-fan'
+        icon: 'mdi-fan',
       },
       {
         text: '気温',
@@ -45,7 +48,7 @@ export default {
         text: '湿度',
         value: 'humid',
         type: '%',
-        icon: 'mdi-water'
+        icon: 'mdi-water',
       },
       {
         text: '気圧',
@@ -59,7 +62,12 @@ export default {
       return this.$store.getters['record/currentRecord'][0]
     },
     co2ChartData() {
-      return this.$store.getters['record/co2Array']
+      const data = this.$store.getters['record/co2Array']
+      if (data) {
+        return data
+      } else {
+        return []
+      }
     },
   },
 }

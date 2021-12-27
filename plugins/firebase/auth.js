@@ -6,8 +6,7 @@ const signInGoogle = (context) => {
     .then((result) => {
     })
     .catch((error) => {
-      // eslint-disable-next-line no-console
-      console.error(error)
+      alert.error("ログイン処理でエラーが発生しました。",error)
     })
 }
 

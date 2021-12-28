@@ -5,7 +5,7 @@ export const state = () => ({
 
 export const getters = {
   records(state) {
-    return state.records
+    return state.records ? state.records : {}
   },
   recordKeys(state) {
     return Object.keys(state.records)
@@ -88,7 +88,6 @@ export const mutations = {
     const avgArray = dataA.map((record, i) => {
       return calcRecordAvg(record, dataB[i])
     })
-    console.log(avgArray)
     state.records = {
       ...state.records,
       avg: avgArray,

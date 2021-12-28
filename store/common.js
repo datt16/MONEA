@@ -33,7 +33,7 @@ export const actions = {
       alert(e)
     }
   },
-  async switchRoom({ state, commit, dispatch, context }, { id }) {
+  async switchRoom({ state, commit, dispatch, context, rootGetters }, { id }) {
     commit('SWITCH_CURRENT_ROOM', { id })
     const sensors = state.room.sensors
     commit('record/RESET_STORE', null, { root: true })
@@ -44,7 +44,9 @@ export const actions = {
         { root: true }
       )
     }
-    const data = context.getters['record/records']
+
+    const data = rootGetters['record/records']
+
     commit(
       'record/CALC_AVG',
       { dataA: data[0], dataB: data[1] },

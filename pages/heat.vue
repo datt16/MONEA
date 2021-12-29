@@ -4,15 +4,37 @@
       <v-card dark>
         <v-card-title class="pb-0">過去の換気状況</v-card-title>
         <v-container>
-          <div class="root" :style="responsiveStyleRoot">
-            <div
-              v-for="i in genarateRandomArray"
-              :key="i[0].value"
-              class="heat-row"
-              :style="rowStyle"
-            >
-              <div v-for="j in i" :key="j.value" class="heat-col">
-                <Chip :color="j.color" :height="width" />
+          <div class="d-flex">
+            <div class="col-label">
+              <span
+                v-for="(i, index) in colLabels"
+                :key="index"
+                class="label-item text-caption"
+              >
+                {{ i }}
+              </span>
+            </div>
+            <div>
+              <div class="row-label">
+                <span
+                  v-for="(i, index) in rowLabels"
+                  :key="index"
+                  class="label-item text-caption"
+                >
+                  {{ i }}
+                </span>
+              </div>
+              <div class="root" :style="responsiveStyleRoot">
+                <div
+                  v-for="i in genarateRandomArray"
+                  :key="i[0].value"
+                  class="heat-row"
+                  :style="rowStyle"
+                >
+                  <div v-for="j in i" :key="j.value" class="heat-col">
+                    <Chip :color="j.color" :height="width" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -40,6 +62,9 @@ import Chip from '@/components/heatmap/Chip.vue'
 const levels = ['#ffebee', '#ffcdd2', '#ef9a9a', '#e57373', '#ef5350']
 export default {
   name: 'Heatmap',
+  components: {
+    Chip,
+  },
   data() {
     return {
       values: [],
@@ -47,17 +72,12 @@ export default {
       rowCnt: 3,
     }
   },
-
-  components: {
-    Chip,
-  },
-
   computed: {
     genarateRandomArray() {
       const a = []
-      for (let i = 0; i < 10; ++i) {
+      for (let i = 0; i < 6; ++i) {
         const b = []
-        for (let j = 0; j < 6; ++j) {
+        for (let j = 0; j < 3; ++j) {
           const v = Math.random()
           const m = {
             value: v,
@@ -85,14 +105,47 @@ export default {
     },
     responsiveStyleRoot() {
       return {
-        maxHeight: `${this.width * this.rowCnt + 2 * this.rowCnt}px`,
+        maxHeight: `${this.width * this.rowCnt + 2 * this.rowCnt + 1}px`,
       }
+    },
+    rowLabels() {
+      return ['0~', '10~', '20~', '30~', '40~', '50~', '(分)']
+    },
+    colLabels() {
+      return ['(時間)', '8', '9', '10']
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
+.col-label {
+  display: flex;
+  flex-direction: column;
+  .label-item {
+    display: flex;
+
+    padding: 1px;
+    margin: 1px;
+    height: 50px;
+
+    justify-content: center;
+    align-items: center;
+  }
+  :first-child {
+    height: 22px;
+  }
+}
+
+.row-label {
+  display: flex;
+  .label-item {
+    padding: 1px;
+    margin: 1px;
+    text-align: center;
+    width: 50px;
+  }
+}
 .root {
   overflow: scroll;
   max-width: 100%;

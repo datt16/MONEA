@@ -10,21 +10,21 @@ export default {
     },
     color: {
       type: String,
-      default: "#000000",
+      default: '#000000',
     },
   },
   computed: {
     computedStyle() {
-      const height = this.height,
-        color = this.color,
-        width = height;
+      const height = this.height
+      const color = this.color
+      const width = height
       return {
         height: `${height}px`,
         width: `${width}px`,
         backgroundColor: color,
-      };
-    }
+      }
+    },
   },
-  name: "Chip",
-};
+  name: 'Chip',
+}
 </script>

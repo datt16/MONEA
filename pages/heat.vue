@@ -1,45 +1,64 @@
 <template>
-  <div class='top'>
-    <p class="text-h6 text-left ml-2 mt-3">
-      過去の換気状況
-    </p>
-    <div class="root">
-      <div v-for="i in genarateRandomArray" :key="i[0].value" class="row" >
-        <div v-for="j in i" :key="j.value" class="col" >
-          <Chip :color="j.color" :height="50" />
-        </div>
-      </div>
-    </div>
-      <div class='ex'>
-        <div>CO2濃度&nbsp;&nbsp;低&nbsp;</div>
-        <div class="box1"></div>
-        <div class="box2"></div>
-        <div class="box3"></div>
-        <div class="box4"></div>
-        <div class="box5"></div>
-        <div>&nbsp;高</div>
-      </div>
-  </div>  
+  <v-row>
+    <v-col cols="6">
+      <v-card dark>
+        <v-card-title class="pb-0">過去の換気状況</v-card-title>
+        <v-container>
+          <div class="root" :style="responsiveStyleRoot">
+            <div
+              v-for="i in genarateRandomArray"
+              :key="i[0].value"
+              class="heat-row"
+              :style="rowStyle"
+            >
+              <div v-for="j in i" :key="j.value" class="heat-col">
+                <Chip :color="j.color" :height="width" />
+              </div>
+            </div>
+          </div>
+
+          <div class="top">
+            <div class="ex">
+              <div>CO2濃度&nbsp;&nbsp;低&nbsp;</div>
+              <div class="box1"></div>
+              <div class="box2"></div>
+              <div class="box3"></div>
+              <div class="box4"></div>
+              <div class="box5"></div>
+              <div>&nbsp;高</div>
+            </div>
+          </div>
+        </v-container>
+      </v-card>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
+import Chip from '@/components/heatmap/Chip.vue'
 
-const levels = ["#ffebee", "#ffcdd2", "#ef9a9a", "#e57373", "#ef5350"];
+const levels = ['#ffebee', '#ffcdd2', '#ef9a9a', '#e57373', '#ef5350']
 export default {
-  name: "Heatmap",
+  name: 'Heatmap',
   data() {
     return {
       values: [],
-    };
+      width: 50,
+      rowCnt: 3,
+    }
   },
-  
+
+  components: {
+    Chip,
+  },
+
   computed: {
     genarateRandomArray() {
-      const a = [];
-      for (let i = 0; i < 6; ++i) {
-        const b = [];
-        for (let j = 0; j < 10; ++j) {
-          const v = Math.random();
+      const a = []
+      for (let i = 0; i < 10; ++i) {
+        const b = []
+        for (let j = 0; j < 6; ++j) {
+          const v = Math.random()
           const m = {
             value: v,
             color:
@@ -52,66 +71,75 @@ export default {
                 : v < 0.8
                 ? levels[3]
                 : levels[4],
-          };
-          b.push(m);
+          }
+          b.push(m)
         }
-        a.push(b);
+        a.push(b)
       }
-      return a;
+      return a
+    },
+    rowStyle() {
+      return {
+        width: `${this.width}px`,
+      }
+    },
+    responsiveStyleRoot() {
+      return {
+        maxHeight: `${this.width * this.rowCnt + 2 * this.rowCnt}px`,
+      }
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
 .root {
-  margin-left: 19px;
-  margin-right: 18px;
-  margin-top: 25px;
+  overflow: scroll;
+  max-width: 100%;
   display: flex;
-  justify-content: center;
+
+  .heat-row {
+    margin: 1px;
+  }
+  .heat-col {
+    margin: 0px;
+    padding: 1px;
+  }
 }
-.row {
-  width: 30px; 
-  margin: 0px;
-}
-.col {
-  width: 50px;
-  padding: 1px;
-}
-.ex{
+
+.ex {
   display: flex;
   justify-content: flex-end;
   margin-top: 7px;
 }
-.box1{
-  margin       :3px 1px 0px;
-  width        : 15px;
-  height       : 15px;
-  background   : #ffebee;
+.box1 {
+  margin: 3px 1px 0px;
+  width: 15px;
+  height: 15px;
+  background: #ffebee;
 }
-.box2{
-  margin       :3px 1px 0px;
-  width        : 15px;
-  height       : 15px;
-  background   : #ffcdd2;
+.box2 {
+  margin: 3px 1px 0px;
+  width: 15px;
+  height: 15px;
+  background: #ffcdd2;
 }
-.box3{
-  margin       :3px 1px 0px;
-  width        : 15px;
-  height       : 15px;
-  background   : #ef9a9a;
+.box3 {
+  margin: 3px 1px 0px;
+  width: 15px;
+  height: 15px;
+  background: #ef9a9a;
 }
-.box4{
-  margin       :3px 1px 0px;
-  width        : 15px;
-  height       : 15px;
-  background   : #e57373;
+.box4 {
+  margin: 3px 1px 0px;
+  width: 15px;
+  height: 15px;
+  background: #e57373;
 }
-.box5{
-  margin       :3px 1px 0px;
-  width        : 15px;
-  height       : 15px;
-  background   : #ef5350;
+.box5 {
+  margin: 3px 1px 0px;
+  width: 15px;
+  height: 15px;
+  background: #ef5350;
 }
 </style>

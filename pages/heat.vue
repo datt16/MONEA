@@ -1,38 +1,40 @@
 <template>
   <v-row>
-    <v-col cols="6">
+    <v-col :cols="this.cols">
       <v-card dark>
         <v-card-title class="pb-0">過去の換気状況</v-card-title>
         <v-container>
           <div class="d-flex">
-            <div class="col-label">
-              <span
-                v-for="(i, index) in colLabels"
-                :key="index"
-                class="label-item text-caption"
-              >
-                {{ i }}
-              </span>
-            </div>
             <div>
-              <div class="row-label">
-                <span
-                  v-for="(i, index) in rowLabels"
-                  :key="index"
-                  class="label-item text-caption"
-                >
-                  {{ i }}
-                </span>
-              </div>
               <div class="root" :style="responsiveStyleRoot">
                 <div
-                  v-for="i in genarateRandomArray"
-                  :key="i[0].value"
-                  class="heat-row"
-                  :style="rowStyle"
+                  v-for="(i, Index) in genarateRandomArray"
+                  :key="Index"
+                  class="map-row"
                 >
-                  <div v-for="j in i" :key="j.value" class="heat-col">
-                    <Chip :color="j.color" :height="width" />
+                  <div v-for="(j, index) in i" :key="index" class="map-col">
+                    <!-- ヒートマップ: 行ラベル -->
+                    <div
+                      v-if="Index === 0"
+                      class="map-col-label"
+                      :style="tileWidth"
+                    >
+                      {{ j.value }}
+                    </div>
+
+                    <!-- ヒートマップ: 列ラベル -->
+                    <div
+                      v-else-if="index === 0"
+                      class="map-row-label"
+                      :style="{ ...tileWidth, ...tileHeight }"
+                    >
+                      {{ j.value }}
+                    </div>
+
+                    <!-- ヒートマップ: 通常タイル -->
+                    <div v-else :style="tileHeight">
+                      <Chip :color="j.attr" :height="width" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -60,6 +62,19 @@
 import Chip from '@/components/heatmap/Chip.vue'
 
 const levels = ['#ffebee', '#ffcdd2', '#ef9a9a', '#e57373', '#ef5350']
+const lavels = ['0', '1', '2', '3']
+
+const responsiveStyle = {
+  lg: {
+    cols: 4,
+    chipWidth: 75,
+  },
+  xl: {
+    cols: 4,
+    chipWidth: 75,
+  },
+}
+
 export default {
   name: 'Heatmap',
   components: {
@@ -68,6 +83,7 @@ export default {
   data() {
     return {
       values: [],
+      cols: 6,
       width: 50,
       rowCnt: 3,
     }
@@ -75,13 +91,19 @@ export default {
   computed: {
     genarateRandomArray() {
       const a = []
-      for (let i = 0; i < 6; ++i) {
+
+      const labels = []
+      this.rowLabels.forEach((x) => labels.push({ value: x, attr: 'LABEL' }))
+      a.push(labels)
+
+      for (let i = 0; i < 3; ++i) {
         const b = []
-        for (let j = 0; j < 3; ++j) {
+        b.push({ value: lavels[i], attr: 'LABEL' })
+        for (let j = 0; j < 6; ++j) {
           const v = Math.random()
           const m = {
             value: v,
-            color:
+            attr:
               v < 0.2
                 ? levels[0]
                 : v < 0.4
@@ -98,65 +120,58 @@ export default {
       }
       return a
     },
-    rowStyle() {
+    tileHeight() {
+      return {
+        height: `${this.width}px`,
+      }
+    },
+    tileWidth() {
       return {
         width: `${this.width}px`,
       }
     },
     responsiveStyleRoot() {
       return {
-        maxHeight: `${this.width * this.rowCnt + 2 * this.rowCnt + 1}px`,
+        // maxHeight: `${this.width * this.rowCnt + 2 * this.rowCnt + 1}px`,
       }
     },
     rowLabels() {
-      return ['0~', '10~', '20~', '30~', '40~', '50~', '(分)']
+      return ['時間 | 分', '0~', '10~', '20~', '30~', '40~', '50~']
     },
     colLabels() {
       return ['(時間)', '8', '9', '10']
     },
   },
+  mounted() {
+    const breakpoint = this.$vuetify.breakpoint.name
+    console.log(breakpoint)
+    if (responsiveStyle[breakpoint]) {
+      console.log('responsive Style is seted for ', breakpoint)
+      this.cols = responsiveStyle[breakpoint].cols
+      this.width = responsiveStyle[breakpoint].chipWidth
+    }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-.col-label {
-  display: flex;
-  flex-direction: column;
-  .label-item {
+.root {
+  overflow: auto;
+  max-width: 100%;
+
+  .map-row {
     display: flex;
+  }
 
-    padding: 1px;
-    margin: 1px;
-    height: 50px;
-
+  .map-row-label {
+    display: flex;
     justify-content: center;
     align-items: center;
   }
-  :first-child {
-    height: 22px;
-  }
-}
 
-.row-label {
-  display: flex;
-  .label-item {
-    padding: 1px;
-    margin: 1px;
-    text-align: center;
-    width: 50px;
-  }
-}
-.root {
-  overflow: scroll;
-  max-width: 100%;
-  display: flex;
-
-  .heat-row {
-    margin: 1px;
-  }
-  .heat-col {
-    margin: 0px;
-    padding: 1px;
+  .map-col-label {
+    display: flex;
+    justify-content: center;
   }
 }
 

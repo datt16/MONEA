@@ -1,6 +1,6 @@
 <template>
-  <v-row>
-    <v-col :cols="this.cols">
+  <v-row v-resize="onResize">
+    <v-col :cols="cols">
       <v-card dark>
         <v-card-title class="pb-0">過去の換気状況</v-card-title>
         <v-container>
@@ -16,7 +16,7 @@
                     <!-- ヒートマップ: 行ラベル -->
                     <div
                       v-if="Index === 0"
-                      class="map-col-label"
+                      :class="`map-col-label ${labelsStyle}`"
                       :style="tileWidth"
                     >
                       {{ j.value }}
@@ -25,7 +25,7 @@
                     <!-- ヒートマップ: 列ラベル -->
                     <div
                       v-else-if="index === 0"
-                      class="map-row-label"
+                      :class="`map-row-label ${labelsStyle}`"
                       :style="{ ...tileWidth, ...tileHeight }"
                     >
                       {{ j.value }}
@@ -66,12 +66,27 @@ const lavels = ['0', '1', '2', '3']
 
 const responsiveStyle = {
   lg: {
-    cols: 4,
+    cols: 6,
     chipWidth: 75,
   },
   xl: {
     cols: 4,
     chipWidth: 75,
+  },
+  md: {
+    cols: 6,
+    chipWidth: 50,
+    labelsStyle: 'text-caption',
+  },
+  sm: {
+    cols: 6,
+    chipWidth: 48,
+    labelsStyle: 'text-caption',
+  },
+  xs: {
+    cols: 12,
+    chipWidth: 44,
+    labelsStyle: 'text-caption',
   },
 }
 
@@ -86,6 +101,7 @@ export default {
       cols: 6,
       width: 50,
       rowCnt: 3,
+      labelsStyle: '',
     }
   },
   computed: {
@@ -132,7 +148,7 @@ export default {
     },
     responsiveStyleRoot() {
       return {
-        // maxHeight: `${this.width * this.rowCnt + 2 * this.rowCnt + 1}px`,
+        maxHeight: `${this.width * this.rowCnt + 24 + 2 * this.rowCnt + 1}px`,
       }
     },
     rowLabels() {
@@ -142,14 +158,19 @@ export default {
       return ['(時間)', '8', '9', '10']
     },
   },
+  methods: {
+    onResize() {
+      const breakpoint = this.$vuetify.breakpoint.name
+      const style = responsiveStyle[breakpoint]
+      if (style) {
+        this.cols = style.cols
+        this.width = style.chipWidth
+        this.labelsStyle = style.labelsStyle ? style.labelsStyle : ''
+      }
+    },
+  },
   mounted() {
-    const breakpoint = this.$vuetify.breakpoint.name
-    console.log(breakpoint)
-    if (responsiveStyle[breakpoint]) {
-      console.log('responsive Style is seted for ', breakpoint)
-      this.cols = responsiveStyle[breakpoint].cols
-      this.width = responsiveStyle[breakpoint].chipWidth
-    }
+    this.onResize()
   },
 }
 </script>
@@ -167,6 +188,11 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .map-col {
+    margin-bottom: 1px;
+    margin-left: 1px;
   }
 
   .map-col-label {

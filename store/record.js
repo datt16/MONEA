@@ -27,6 +27,73 @@ export const getters = {
       ]
     }
   },
+  heatmap(state) {
+    if (state.records.avg) {
+      const result = []
+      let a = []
+      let current = ''
+
+      // recordsを時間ごとに分ける
+      state.records.avg.forEach((rec) => {
+        if (rec.date.split('_')[1].split(':')[0] !== current) {
+          if (a.length !== 0) result.push(a)
+          current = rec.date.split('_')[1].split(':')[0]
+          a = []
+          a.push(rec)
+        } else {
+          a.push(rec)
+        }
+      })
+      result.push(a)
+
+      // 欠損値処理
+      const baseList = ['00', '10', '20', '30', '40', '50']
+      result.map((hour) => {
+        if (hour.length !== 6) {
+          // 欠損値あったとき
+          // どの分数が欠損しているのか探す → 欠損値を埋めた配列を生成 → 元の配列に追加して返却
+          const whiteList = []
+          hour.forEach((minute) => {
+            whiteList.push(minute.date.split('_')[1].split(':')[1])
+          })
+          const blackList = baseList.filter((x) => !whiteList.includes(x))
+
+          // 欠損値埋め
+          blackList.forEach((minute) => {
+            const newDate = hour[0].date.split(':')[0] + ':' + minute
+            hour.push({
+              date: newDate,
+              co2: -255,
+              temp: -255,
+              pressure: -255,
+              humid: -255,
+            })
+          })
+
+          // compareWithRecordMinute : ソート用、recordの配列をそれぞれの分数(dateの後ろ2文字)でソート
+          // a,b: record
+          const compareWithRecordMinute = (a, b) => {
+            if (parseInt(a.date.split(':')[1]) > parseInt(b.date.split(':')[1]))
+              return 1
+            else if (
+              parseInt(a.date.split(':')[1]) < parseInt(b.date.split(':')[1])
+            )
+              return -1
+            else return 0
+          }
+
+          hour.sort(compareWithRecordMinute)
+
+          return hour
+        }
+        return hour
+      })
+
+      return result
+    } else {
+      return []
+    }
+  },
   co2Array(state) {
     const data = state.records.avg
     return data ? data.map((x) => ({ co2: x.co2, date: x.date })) : []

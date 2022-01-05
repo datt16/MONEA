@@ -6,10 +6,6 @@
 
     <v-spacer></v-spacer>
 
-    <span class="text-caption mr-2">{{
-      user ? user.displayName : 'ログインしてません'
-    }}</span>
-    <v-btn disabled @click="act">{{ isAuth ? 'ログアウト' : 'ログイン' }}</v-btn>
   </v-app-bar>
 </template>
 

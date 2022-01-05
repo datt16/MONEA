@@ -1,12 +1,12 @@
 <template>
-  <v-row v-resize="onResize">
-    <v-col :cols="cols">
-      <v-card dark>
-        <v-card-title class="pb-0">過去の換気状況</v-card-title>
+  <v-row v-resize="onResize" justify="center">
+    <v-col cols="12" sm="10" lg="6">
+      <v-card flat>
+        <v-card-title class="pb-0 font-weight-bold">過去の換気状況</v-card-title>
         <v-container>
-          <div class="d-flex">
+          <div class="d-flex overflow-auto justify-center">
             <div>
-              <div class="root" :style="responsiveStyleRoot">
+              <div class="root">
                 <div
                   v-for="(i, Index) in generateHeatmapArray"
                   :key="Index"
@@ -56,32 +56,28 @@ const colors = ['#ffebee', '#ffcdd2', '#ef9a9a', '#e57373', '#ef5350']
 
 const responsiveStyle = {
   lg: {
-    cols: 6,
     chipWidth: 75,
+    labelsStyle: 'text-body-1',
   },
   xl: {
-    cols: 4,
     chipWidth: 75,
   },
   md: {
-    cols: 6,
-    chipWidth: 50,
+    chipWidth: 75,
     labelsStyle: 'text-caption',
   },
   sm: {
-    cols: 6,
     chipWidth: 48,
     labelsStyle: 'text-caption',
   },
   xs: {
-    cols: 12,
     chipWidth: 44,
     labelsStyle: 'text-caption',
   },
 }
 
 export default {
-  name: 'Heatmap',
+  name: "HeatmapView",
   components: {
     Chip,
     Legend
@@ -91,7 +87,7 @@ export default {
       values: [],
       cols: 6,
       width: 50,
-      rowCnt: 3,
+      rowCnt: 24,
       labelsStyle: '',
     }
   },
@@ -117,7 +113,7 @@ export default {
           const m = {
             value: v,
             attr:
-              v <= -255 ? "#444" :
+              v <= -255 ? "#666" :
                 v <= levels[0]
                   ? colors[0]
                   : v < levels[1]
@@ -144,11 +140,6 @@ export default {
         width: `${this.width}px`,
       }
     },
-    responsiveStyleRoot() {
-      return {
-        maxHeight: `${this.width * this.rowCnt + 24 + 2 * this.rowCnt + 1}px`,
-      }
-    },
     rowLabels() {
       return ['時間 | 分', '0~', '10~', '20~', '30~', '40~', '50~']
     },
@@ -173,7 +164,6 @@ export default {
 <style lang="scss" scoped>
 .root {
   overflow: auto;
-  max-width: 100%;
 
   .map-row {
     display: flex;
@@ -196,44 +186,5 @@ export default {
   }
 }
 
-.ex {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 7px;
-}
-
-.box1 {
-  margin: 3px 1px 0;
-  width: 15px;
-  height: 15px;
-  background: #ffebee;
-}
-
-.box2 {
-  margin: 3px 1px 0;
-  width: 15px;
-  height: 15px;
-  background: #ffcdd2;
-}
-
-.box3 {
-  margin: 3px 1px 0;
-  width: 15px;
-  height: 15px;
-  background: #ef9a9a;
-}
-
-.box4 {
-  margin: 3px 1px 0;
-  width: 15px;
-  height: 15px;
-  background: #e57373;
-}
-
-.box5 {
-  margin: 3px 1px 0;
-  width: 15px;
-  height: 15px;
-  background: #ef5350;
-}
 </style>
+

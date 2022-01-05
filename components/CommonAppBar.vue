@@ -18,21 +18,8 @@ export default {
     },
   },
   computed: {
-    isAuth() {
-      return this.$store.getters['auth/isAuthenticated']
-    },
-    user() {
-      return this.$store.getters['auth/user']
-    },
   },
   methods: {
-    act() {
-      if (this.isAuth) {
-        this.$signOut()
-      } else {
-        this.$signInWithGoogle()
-      }
-    },
   },
 }
 </script>

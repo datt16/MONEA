@@ -8,7 +8,7 @@
             <div>
               <div class="root" :style="responsiveStyleRoot">
                 <div
-                  v-for="(i, Index) in genarateRandomArray"
+                  v-for="(i, Index) in generateHeatmapArray"
                   :key="Index"
                   class="map-row"
                 >
@@ -33,7 +33,7 @@
 
                     <!-- ヒートマップ: 通常タイル -->
                     <div v-else :style="tileHeight">
-                      <Chip :color="j.attr" :height="width" />
+                      <Chip :color="j.attr" :height="width"/>
                     </div>
                   </div>
                 </div>
@@ -61,8 +61,7 @@
 <script>
 import Chip from '@/components/heatmap/Chip.vue'
 
-const levels = ['#ffebee', '#ffcdd2', '#ef9a9a', '#e57373', '#ef5350']
-const lavels = ['0', '1', '2', '3']
+const colors = ['#ffebee', '#ffcdd2', '#ef9a9a', '#e57373', '#ef5350']
 
 const responsiveStyle = {
   lg: {
@@ -105,35 +104,42 @@ export default {
     }
   },
   computed: {
-    genarateRandomArray() {
+    generateHeatmapArray() {
       const a = []
+      const data = this.$store.getters['record/heatmap']
+
+      if (!data) return []
+
+      const levels = [400, 600, 800, 1000]
+      const target = 'co2'
 
       const labels = []
-      this.rowLabels.forEach((x) => labels.push({ value: x, attr: 'LABEL' }))
+      this.rowLabels.forEach((x) => labels.push({value: x, attr: 'LABEL'}))
       a.push(labels)
 
-      for (let i = 0; i < 3; ++i) {
+      data.forEach((x) => {
         const b = []
-        b.push({ value: lavels[i], attr: 'LABEL' })
-        for (let j = 0; j < 6; ++j) {
-          const v = Math.random()
+        b.push({value: x[0].date.split('_')[1].split(':')[0], attr: 'LABEL'})
+        x.forEach((y) => {
+          const v = y[target]
           const m = {
             value: v,
             attr:
-              v < 0.2
-                ? levels[0]
-                : v < 0.4
-                ? levels[1]
-                : v < 0.6
-                ? levels[2]
-                : v < 0.8
-                ? levels[3]
-                : levels[4],
+              v <= -255 ? "#444" :
+                v <= levels[0]
+                  ? colors[0]
+                  : v < levels[1]
+                    ? colors[1]
+                    : v < levels[2]
+                      ? colors[2]
+                      : v < levels[3]
+                        ? colors[3]
+                        : colors[4],
           }
           b.push(m)
-        }
+        })
         a.push(b)
-      }
+      })
       return a
     },
     tileHeight() {
@@ -154,9 +160,9 @@ export default {
     rowLabels() {
       return ['時間 | 分', '0~', '10~', '20~', '30~', '40~', '50~']
     },
-    colLabels() {
-      return ['(時間)', '8', '9', '10']
-    },
+  },
+  mounted() {
+    this.onResize()
   },
   methods: {
     onResize() {
@@ -168,9 +174,6 @@ export default {
         this.labelsStyle = style.labelsStyle ? style.labelsStyle : ''
       }
     },
-  },
-  mounted() {
-    this.onResize()
   },
 }
 </script>
@@ -206,32 +209,37 @@ export default {
   justify-content: flex-end;
   margin-top: 7px;
 }
+
 .box1 {
-  margin: 3px 1px 0px;
+  margin: 3px 1px 0;
   width: 15px;
   height: 15px;
   background: #ffebee;
 }
+
 .box2 {
-  margin: 3px 1px 0px;
+  margin: 3px 1px 0;
   width: 15px;
   height: 15px;
   background: #ffcdd2;
 }
+
 .box3 {
-  margin: 3px 1px 0px;
+  margin: 3px 1px 0;
   width: 15px;
   height: 15px;
   background: #ef9a9a;
 }
+
 .box4 {
-  margin: 3px 1px 0px;
+  margin: 3px 1px 0;
   width: 15px;
   height: 15px;
   background: #e57373;
 }
+
 .box5 {
-  margin: 3px 1px 0px;
+  margin: 3px 1px 0;
   width: 15px;
   height: 15px;
   background: #ef5350;

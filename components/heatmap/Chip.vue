@@ -3,6 +3,7 @@
 </template>
 <script>
 export default {
+  name: 'Chip',
   props: {
     height: {
       type: Number,
@@ -17,14 +18,12 @@ export default {
     computedStyle() {
       const height = this.height
       const color = this.color
-      const width = height
       return {
         height: `${height}px`,
-        width: `${width}px`,
+        width: `${height}px`,
         backgroundColor: color,
       }
     },
   },
-  name: 'Chip',
 }
 </script>

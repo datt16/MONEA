@@ -3,7 +3,6 @@
     <common-app-bar :title="currentPageTitle"/>
     <v-main>
       <v-container>
-        <common-room-switcher/>
         <Nuxt/>
       </v-container>
     </v-main>
@@ -18,6 +17,10 @@ export default {
   data: () => ({
     currentPageTitle: "ホーム"
   }),
-
+  methods: {
+    switchSensor(id) {
+      this.$store.dispatch('common/switchRoom', {id})
+    },
+  },
 }
 </script>

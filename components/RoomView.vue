@@ -8,35 +8,8 @@
               <v-card min-height="100" tile outlined
                       class="d-flex justify-center align-center">
 
-                <v-menu v-if="areaItem.id" v-model="sensors[areaItem.id].isShown" offset-x
-                        :close-on-content-click="false">
-                  <template #activator="{on, attr}">
-                    <v-btn fab rounded color="grey darken-1" elevation="0" dark v-bind="attr" v-on="on">
-                      <v-icon>mdi-home</v-icon>
-                    </v-btn>
-                  </template>
-                  <v-card>
-                    <v-toolbar flat color="cyan" dark>
-                      <v-toolbar-title class="font-weight-bold">センサーA</v-toolbar-title>
-                      <v-spacer></v-spacer>
-                      <v-toolbar-items>
-                        <v-btn icon>
-                          <v-icon>mdi-close</v-icon>
-                        </v-btn>
-                      </v-toolbar-items>
-                    </v-toolbar>
-
-                    <v-row no-gutters class="pa-4">
-                      <v-col cols="12">
-                        <span class="text-subtitle-1">CO2濃度</span>
-                      </v-col>
-                      <v-col cols="12">
-                        <span class="text-h3 font-weight-bold">1000</span>
-                        <span class="text-lg-subtitle-1">ppm</span>
-                      </v-col>
-                    </v-row>
-                  </v-card>
-                </v-menu>
+                <RoomViewPopup v-if="areaItem.id" v-model="popup" :active="sensors[areaItem.id].isShown"
+                               :sensor="sensors[areaItem.id]"/>
 
               </v-card>
             </v-col>
@@ -49,42 +22,58 @@
 </template>
 
 <script>
+import RoomViewPopup from "~/components/RoomViewPopup";
+
+const sampleData = {
+  sensor1: {
+    id: "sensor1",
+    isShown: true,
+    title: "センサーA",
+    subTitle: "二酸化炭素濃度",
+    value: 1400,
+    color: "orange",
+    unit: "ppm",
+    posX: 0,
+    posY: 0
+  },
+  sensor2: {
+    id: "sensor2",
+    isShown: true,
+    title: "センサーB",
+    subTitle: "二酸化炭素濃度",
+    value: 800,
+    color: "cyan",
+    unit: "ppm",
+    posX: 1,
+    posY: 3
+  }
+}
+
 export default {
   name: "RoomView",
+  components: {
+    RoomViewPopup
+  }
+  ,
   data: () => ({
-    areas: {
-      0: [{}, {id: "sensor1"}, {}, {}],
-      1: [{}, {}, {}, {}],
-      2: [{}, {}, {id: "sensor2"}, {}],
-      3: [{}, {}, {}, {}]
-    },
-
-    sensors: {
-      sensor1: {
-        id: "sensor1",
-        isShown: false,
-        title: "センサーA",
-        subTitle: "二酸化炭素濃度",
-        value: 1200,
-        color: "blue",
-        posX: 0,
-        posY: 0
-      },
-      sensor2: {
-        id: "sensor2",
-        isShown: false,
-        title: "センサーB",
-        subTitle: "二酸化炭素濃度",
-        value: 1200,
-        color: "blue",
-        posX: 3,
-        posY: 3
-      },
-    }
+    areas: {},
+    sensors: {},
+    popup: false
   }),
+  mounted() {
+    this.areas = {
+      0: [{}, {}, {}, {}],
+      1: [{}, {}, {}, {}],
+      2: [{}, {}, {}, {}],
+      3: [{}, {}, {}, {}]
+    }
+    this.sensors = sampleData
+    Object.keys(this.sensors).forEach(x => {
+      const sensor = this.sensors[x]
+      this.areas[sensor.posY][sensor.posY].id = sensor.id
+    })
+  }
+
 }
 </script>
 
-<style scoped>
-
-</style>

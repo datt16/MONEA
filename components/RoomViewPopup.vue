@@ -1,8 +1,7 @@
 <template>
   <v-menu v-model="isShown" offset-y
           :close-on-content-click="false"
-          :close-on-click="false"
-          :nudge-width="100">
+          :close-on-click="false">
 
     <template #activator="{on, attr}">
       <v-btn fab rounded :color="sensor.color" elevation="0" dark v-bind="attr" v-on="on">
@@ -12,26 +11,26 @@
 
     <v-card>
 
-      <v-toolbar flat :color="sensor.color" dark>
+      <v-toolbar flat :color="sensor.color" dark dense>
         <v-toolbar-title class="font-weight-bold align-baseline">
-          {{ sensor.title }}
+          <span>{{ sensor.title }}</span>
+          <v-chip small color="success" class="ml-2">
+            正常
+          </v-chip>
         </v-toolbar-title>
-
         <v-spacer></v-spacer>
-        <v-toolbar-items>
-          <v-btn icon @click="isShown = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-toolbar-items>
+        <v-btn icon @click="isShown = false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
       </v-toolbar>
 
-      <v-row no-gutters class="pa-4">
+      <v-row no-gutters class="pa-2">
         <v-col cols="12">
-          <span class="text-subtitle-1">{{ sensor.subTitle }}</span>
+          <span class="text-subtitle-2">{{ sensor.subTitle }}</span>
         </v-col>
         <v-col cols="12">
-          <span class="text-h3 font-weight-bold">{{ sensor.value }}</span>
-          <span class="text-lg-subtitle-1">{{ sensor.unit }}</span>
+          <span class="text-h4 font-weight-bold">{{ sensor.value }}</span>
+          <span class="text-lg-body">{{ sensor.unit }}</span>
         </v-col>
       </v-row>
 

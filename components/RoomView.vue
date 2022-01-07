@@ -1,5 +1,10 @@
 <template>
   <div>
+<!--    <v-row no-gutters>-->
+<!--      <v-col cols="12 pa-0 ma-0">-->
+<!--        <span class="subtitle-1 font-weight-bold">各センサーの状態</span>-->
+<!--      </v-col>-->
+<!--    </v-row>-->
     <v-row>
       <v-col cols="12">
         <v-sheet color="grey" class="pa-1">
@@ -34,7 +39,7 @@ const sampleData = {
     color: "orange",
     unit: "ppm",
     posX: 0,
-    posY: 0
+    posY: 1
   },
   sensor2: {
     id: "sensor2",
@@ -44,7 +49,7 @@ const sampleData = {
     value: 800,
     color: "cyan",
     unit: "ppm",
-    posX: 1,
+    posX: 3,
     posY: 3
   }
 }
@@ -70,7 +75,7 @@ export default {
     this.sensors = sampleData
     Object.keys(this.sensors).forEach(x => {
       const sensor = this.sensors[x]
-      this.areas[sensor.posY][sensor.posY].id = sensor.id
+      this.areas[sensor.posY][sensor.posX].id = sensor.id
     })
   }
 

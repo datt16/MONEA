@@ -43,6 +43,7 @@
             :page.sync="page"
             sort-by="date"
             sort-desc=""
+            :mobile-breakpoint="null"
           >
             <template #[`item.co2`]="{ item }">
               <v-chip
@@ -90,7 +91,7 @@ export default {
         align: 'start',
       },
       {
-        text: 'CO2濃度',
+        text: 'CO2',
         value: 'co2',
       },
       {

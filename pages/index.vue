@@ -2,7 +2,7 @@
   <div id="home">
     <v-row no-gutters>
       <v-col cols="12">
-        <air-status-view :co2="currentRecord.co2" />
+        <air-status-view :co2="currentRecord ? currentRecord.co2 : null"/>
       </v-col>
     </v-row>
 
@@ -12,17 +12,14 @@
           :type="head.type"
           :title="head.text"
           :icon="head.icon"
-          :value="currentRecord[head.value]"
+          :value="currentRecord ? currentRecord[head.value] : null"
         />
       </v-col>
     </v-row>
 
     <v-row class="py-2" no-gutters>
-      <v-col v-if="currentRecord.co2 < 0" cols="12">
-        <v-skeleton-loader type="card" />
-      </v-col>
-      <v-col v-else cols="12">
-        <chart-view :records="co2ChartData" />
+      <v-col cols="12">
+        <chart-view :records="co2ChartData"/>
       </v-col>
     </v-row>
   </div>
@@ -69,6 +66,6 @@ export default {
         return []
       }
     },
-  },
+  }
 }
 </script>

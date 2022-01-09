@@ -1,41 +1,46 @@
 <template>
   <div id="chart-view">
-    <v-card min-width="350px" min-height="200px" outlined>
-      <v-card-text class="text-center text-h6 black--text">
-        二酸化炭素濃度の推移
-      </v-card-text>
-      <v-sheet
-        class="v-sheet--offset mx-auto"
-        color="white"
-        elevation="0"
-        max-width="calc(100% - 32px)"
-      >
-        <v-sparkline
-          class="body-2"
-          color="black"
-          :value="value"
-          :labels="labels"
-          :gradient="gradient"
-          :padding="padding"
-          :line-width="width"
-          :stroke-linecap="lineCap"
-          :gradient-direction="gradientDirection"
-          :auto-line-width="autoLineWidth"
-          auto-draw
+    <div v-if="!value">
+      <v-skeleton-loader type="image"></v-skeleton-loader>
+    </div>
+    <div v-else>
+      <v-card min-width="350px" min-height="200px" outlined>
+        <v-card-text class="text-center text-h6 black--text">
+          二酸化炭素濃度の推移
+        </v-card-text>
+        <v-sheet
+          class="v-sheet--offset mx-auto"
+          color="white"
+          elevation="0"
+          max-width="calc(100% - 32px)"
         >
-          <template #label="label">
-            {{ label.value }}
-          </template>
-        </v-sparkline>
-      </v-sheet>
+          <v-sparkline
+            class="body-2"
+            color="black"
+            :value="value"
+            :labels="labels"
+            :gradient="gradient"
+            :padding="padding"
+            :line-width="width"
+            :stroke-linecap="lineCap"
+            :gradient-direction="gradientDirection"
+            :auto-line-width="autoLineWidth"
+            auto-draw
+          >
+            <template #label="label">
+              {{ label.value }}
+            </template>
+          </v-sparkline>
+        </v-sheet>
 
-      <v-card-text class="pt-0">
-        <div class="text-body-2 grey--text text--darken-2">
-          <v-icon small> mdi-clock </v-icon>
-          過去{{ records.length * 10 }}分間の推移を表示（10分間隔）
-        </div>
-      </v-card-text>
-    </v-card>
+        <v-card-text class="pt-0">
+          <div class="text-body-2 grey--text text--darken-2">
+            <v-icon small> mdi-clock</v-icon>
+            過去{{ records.length * 10 }}分間の推移を表示（10分間隔）
+          </div>
+        </v-card-text>
+      </v-card>
+    </div>
   </div>
 </template>
 

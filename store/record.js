@@ -16,15 +16,20 @@ export const getters = {
         return i >= state.recordCnt - 1
       })
     } else {
-      return [
-        {
-          date: '0000-00-00_00:00',
-          co2: -255,
-          temp: -255,
-          pressure: -255,
-          humid: -255,
-        },
-      ]
+      return []
+    }
+  },
+
+  currentRecordWithAllSensor(state, getters) {
+    if (state.records !== {}) {
+      return getters.recordKeys.map((key) => {
+        const rec = state.records[key].filter((_, i) => {
+          return i >= state.recordCnt - 1
+        })
+        return { [key]: { ...{ id: key }, ...rec[0] } }
+      })
+    } else {
+      return {}
     }
   },
   heatmap(state) {

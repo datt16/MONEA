@@ -8,7 +8,7 @@
     <v-menu offset-y>
       <template #activator="{on, attr}">
         <v-btn depressed v-bind="attr" v-on="on">
-          4J教室
+          {{ roomData ? roomData.name : '4J教室' }}
           <v-icon>mdi-menu-down</v-icon>
         </v-btn>
       </template>
@@ -16,7 +16,7 @@
         <v-list-item link @click="switchSensor(item.id)">
           <v-icon left dense>mdi-home</v-icon>
           <v-list-item-content>
-            <v-list-item-title> {{ item.name }} </v-list-item-title>
+            <v-list-item-title> {{ item.name }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -44,6 +44,9 @@ export default {
     },
   },
   methods: {
+    switchSensor(id) {
+      this.$store.dispatch('common/switchRoom', {id})
+    },
   },
 }
 </script>

@@ -58,11 +58,11 @@ export default {
       default: () => ({
         id: "sensor1",
         isShown: false,
-        title: "初期値",
-        subTitle: "二酸化炭素濃度",
-        value: 1000,
-        unit: "ppm",
-        color: "blue",
+        title: "データなし",
+        subTitle: "---",
+        value: "N/A",
+        unit: "---",
+        color: "grey",
         description: ""
       })
     },

@@ -12,12 +12,23 @@
     <v-card>
 
       <v-toolbar flat :color="sensor.color" dark dense>
-        <v-toolbar-title class="font-weight-bold align-baseline">
-          <span>{{ sensor.title }}</span>
-          <v-chip small color="success" class="ml-2">
-            正常
-          </v-chip>
-        </v-toolbar-title>
+        <v-tooltip bottom>
+          <template #activator="{on, attr}">
+
+            <v-toolbar-title class="font-weight-bold align-baseline" v-bind="attr" v-on="on">
+              <span>{{ sensor.title }}</span>
+              <v-chip v-if="sensor.statusCode === 200" small color="success" class="ml-2">
+                正常
+              </v-chip>
+              <v-chip v-else small color="error" class="ml-2">
+                異常
+              </v-chip>
+            </v-toolbar-title>
+
+          </template>
+          <span>{{ sensor.description }}</span>
+        </v-tooltip>
+
         <v-spacer></v-spacer>
         <v-btn icon @click="isShown = false">
           <v-icon>mdi-close</v-icon>
@@ -37,6 +48,7 @@
     </v-card>
   </v-menu>
 </template>
+
 <script>
 export default {
   name: 'RoomViewPopup',
@@ -46,11 +58,12 @@ export default {
       default: () => ({
         id: "sensor1",
         isShown: false,
-        title: "センサーA",
+        title: "初期値",
         subTitle: "二酸化炭素濃度",
         value: 1000,
         unit: "ppm",
         color: "blue",
+        description: ""
       })
     },
     active: {

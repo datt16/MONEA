@@ -2,6 +2,28 @@ export const state = () => ({
   room: null,
   rooms: null,
   currentSensor: null,
+  headers: {
+    co2: {
+      text: '二酸化炭素濃度',
+      value: 'co2',
+      unit: 'ppm',
+    },
+    temp: {
+      text: '気温',
+      value: 'temp',
+      unit: '℃',
+    },
+    humid: {
+      text: '湿度',
+      value: 'humid',
+      unit: '%',
+    },
+    pressure: {
+      text: '気圧',
+      value: 'pressure',
+      unit: 'hPa',
+    },
+  },
 })
 
 export const getters = {
@@ -16,6 +38,9 @@ export const getters = {
   },
   currentSensor(state) {
     return state.currentSensor
+  },
+  headers(state) {
+    return state.headers
   },
 }
 

@@ -1,10 +1,10 @@
 <template>
   <div>
-<!--    <v-row no-gutters>-->
-<!--      <v-col cols="12 pa-0 ma-0">-->
-<!--        <span class="subtitle-1 font-weight-bold">各センサーの状態</span>-->
-<!--      </v-col>-->
-<!--    </v-row>-->
+    <!--    <v-row no-gutters>-->
+    <!--      <v-col cols="12 pa-0 ma-0">-->
+    <!--        <span class="subtitle-1 font-weight-bold">各センサーの状態</span>-->
+    <!--      </v-col>-->
+    <!--    </v-row>-->
     <v-row>
       <v-col cols="12">
         <v-sheet color="grey" class="pa-1">
@@ -29,31 +29,6 @@
 <script>
 import RoomViewPopup from "~/components/RoomViewPopup";
 
-const sampleData = {
-  sensor1: {
-    id: "sensor1",
-    isShown: true,
-    title: "センサーA",
-    subTitle: "二酸化炭素濃度",
-    value: 1400,
-    color: "orange",
-    unit: "ppm",
-    posX: 0,
-    posY: 1
-  },
-  sensor2: {
-    id: "sensor2",
-    isShown: true,
-    title: "センサーB",
-    subTitle: "二酸化炭素濃度",
-    value: 800,
-    color: "cyan",
-    unit: "ppm",
-    posX: 3,
-    posY: 3
-  }
-}
-
 export default {
   name: "RoomView",
   components: {
@@ -72,7 +47,33 @@ export default {
       2: [{}, {}, {}, {}],
       3: [{}, {}, {}, {}]
     }
-    this.sensors = sampleData
+
+    const records = this.$store.getters['record/currentRecordWithAllSensor']
+    const sensors = this.$store.getters['sensor/sensors']
+    const headers = this.$store.getters['common/headers']
+
+    const sensorList = Object.keys(records).filter(key => records[key].id !== "avg")
+    const target = "co2"
+
+    sensorList.forEach(key => {
+      const sensor = sensors[key]
+      if (sensor) {
+        this.sensors[key] = {
+          id: sensor.id,
+          isShown: true,
+          title: sensor.name,
+          subTitle: headers[target].text,
+          value: records[key][target], // 注意: データ欠損の可能性あリ
+          color: sensor.color,
+          unit: headers[target].unit,
+          posX: sensor.position.x,
+          posY: sensor.position.y,
+          description: sensor.description,
+          statusCode: sensor.status.code
+        }
+      }
+    })
+
     Object.keys(this.sensors).forEach(x => {
       const sensor = this.sensors[x]
       this.areas[sensor.posY][sensor.posX].id = sensor.id

@@ -21,17 +21,20 @@ export const getters = {
   },
 
   currentRecordWithAllSensor(state, getters) {
+    const list = {}
     if (state.records !== {}) {
-      return getters.recordKeys.map((key) => {
+      getters.recordKeys.forEach((key) => {
         const rec = state.records[key].filter((_, i) => {
           return i >= state.recordCnt - 1
         })
-        return { [key]: { ...{ id: key }, ...rec[0] } }
+        list[key] = { ...{ id: key }, ...rec[0] }
       })
+      return list
     } else {
       return {}
     }
   },
+
   heatmap(state) {
     if (state.records.avg) {
       const result = []

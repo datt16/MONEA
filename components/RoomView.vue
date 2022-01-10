@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h3 class="text-center">センサーの位置と値</h3>
     <v-row>
       <v-col cols="12">
         <v-sheet color="grey" class="pa-2 root">
@@ -31,12 +30,6 @@
         </v-sheet>
       </v-col>
     </v-row>
-
-    <p class="mt-16 pt-16 mb-0 d-flex align-center">
-      <v-icon dense color="blue">mdi-help-circle</v-icon>
-      <span class="ml-2 text-subtitle-1 font-weight-bold blue--text">この画面について</span>
-    </p>
-    <p class="text-caption">部屋に設置されている<b>センサーの位置</b>とそれぞれの<b>センサーの計測値</b>を表示しています。</p>
 
   </div>
 

@@ -11,7 +11,7 @@
 
 
                 <div v-if="indexY == 0 && indexX == 0" class="door"/>
-                <div v-if="indexY == 3&& indexX == 0" class="door"/>
+                <div v-if="indexY == 3 && indexX == 0" class="door"/>
 
 
                 <div v-if="indexY == 0 && indexX == 3" class="window window-top on-wall-right"/>
@@ -33,8 +33,8 @@
     </v-row>
 
     <p class="mt-16 pt-16 mb-0 d-flex align-center">
-      <v-icon>mdi-cube</v-icon>
-      <span class="ml-2 text-h6">部屋の状況</span>
+      <v-icon dense color="blue">mdi-help-circle</v-icon>
+      <span class="ml-2 text-subtitle-1 font-weight-bold blue--text">この画面について</span>
     </p>
     <p class="text-caption">部屋に設置されている<b>センサーの位置</b>とそれぞれの<b>センサーの計測値</b>を表示しています。</p>
 

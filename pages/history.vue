@@ -2,8 +2,14 @@
   <v-row no-gutters>
     <v-tabs v-model="mode" class="mb-4" fixed-tabs>
       <v-tabs-slider color="blue"/>
-      <v-tab>テーブル</v-tab>
-      <v-tab>ヒートマップ</v-tab>
+      <v-tab>
+        <v-icon dense>mdi-table</v-icon>
+        <span class="pl-1">テーブル</span>
+      </v-tab>
+      <v-tab>
+        <v-icon dense>mdi-view-dashboard</v-icon>
+        <span class="pl-1">ヒートマップ</span>
+      </v-tab>
     </v-tabs>
     <v-col cols="12">
       <v-tabs-items v-model="mode">
@@ -13,24 +19,23 @@
               <v-btn
                 depressed
                 color="transparent"
-                class="px-4"
+                class="px-3"
                 v-bind="attrs"
                 v-on="on"
               >
                 <div class="text-h6">
-                    <span class="font-weight-bold mr-1"
-                    >モニタリングデータ</span
-                    >
-                  <span class="text-button">{{ current }}</span>
+                  <span class="font-weight-bold mr-1">センサーの計測値</span>
+                  <span class="text-button">{{ currentSensorName }}</span>
                 </div>
                 <v-icon>mdi-menu-down</v-icon>
               </v-btn>
             </template>
-            <v-list v-for="(id, index) in sensors" :key="index">
+            <v-list v-for="(id, index) in sensorsKeys" :key="index">
               <v-list-item link @click="switchSensor(id)">
                 <v-icon left dense>mdi-home</v-icon>
                 <v-list-item-content>
-                  <v-list-item-title>{{ id }}</v-list-item-title>
+                  <v-list-item-title v-if="sensors">{{ sensors[id] ? sensors[id].name : id }}</v-list-item-title>
+                  <v-list-item-title v-else>Loading</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -45,6 +50,10 @@
             sort-desc=""
             :mobile-breakpoint="null"
           >
+            <template #[`item.date`]="{ item }">
+              <div>{{ item.date.split("_")[1] }}</div>
+            </template>
+
             <template #[`item.co2`]="{ item }">
               <v-chip
                 :color="
@@ -71,7 +80,7 @@
 
         <v-tab-item>
           <span class="text-h6">
-            <HeatmapView />
+            <HeatmapView/>
           </span>
         </v-tab-item>
 
@@ -84,14 +93,15 @@ export default {
   data: () => ({
     page: 1,
     mode: 0,
+    dialog: false,
     headers: [
       {
-        text: 'date',
+        text: '時刻',
         value: 'date',
         align: 'start',
       },
       {
-        text: 'CO2',
+        text: 'CO2濃度',
         value: 'co2',
       },
       {
@@ -109,11 +119,18 @@ export default {
     ],
   }),
   computed: {
-    sensors() {
+    sensorsKeys() {
       return this.$store.getters['record/recordKeys']
+    },
+    sensors() {
+      return this.$store.getters['sensor/sensors']
     },
     current() {
       return this.$store.getters['common/currentSensor']
+    },
+    currentSensorName() {
+      const key = this.$store.getters['common/currentSensor']
+      return this.sensors ? this.sensors[key].name : ""
     },
     records() {
       const data = this.$store.getters['record/records']

@@ -10,7 +10,6 @@
 <!--      </v-col>-->
 <!--    </v-row>-->
 
-    <h3 class="text-center">センサーの位置と値</h3>
     <RoomView class="mb-16"/>
 
   </div>

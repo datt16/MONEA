@@ -2,7 +2,7 @@
   <v-app>
     <common-app-bar :title="currentPageTitle"/>
     <v-main>
-      <v-container>
+      <v-container fluid>
         <v-slide-x-transition>
           <Nuxt/>
         </v-slide-x-transition>

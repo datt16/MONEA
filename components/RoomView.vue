@@ -1,19 +1,28 @@
 <template>
   <div>
-    <!--    <v-row no-gutters>-->
-    <!--      <v-col cols="12 pa-0 ma-0">-->
-    <!--        <span class="subtitle-1 font-weight-bold">各センサーの状態</span>-->
-    <!--      </v-col>-->
-    <!--    </v-row>-->
+    <h3 class="text-center">センサーの位置と値</h3>
     <v-row>
       <v-col cols="12">
-        <v-sheet color="grey" class="pa-1">
+        <v-sheet color="grey" class="pa-2 root">
           <v-row v-for="(i, indexY) in areas" :key="indexY" no-gutters align-content="stretch">
             <v-col v-for="(areaItem, indexX) in i" :key="indexX" align-self="stretch">
               <v-card min-height="100" tile outlined
                       class="d-flex justify-center align-center">
 
-                <RoomViewPopup v-if="areaItem.id" v-model="popup" :active="sensors[areaItem.id] ? sensors[areaItem.id].isShown : false"
+
+                <div v-if="indexY == 0 && indexX == 0" class="door"/>
+                <div v-if="indexY == 3&& indexX == 0" class="door"/>
+
+
+                <div v-if="indexY == 0 && indexX == 3" class="window window-top on-wall-right"/>
+                <div v-if="indexY == 1 && indexX == 3" class="window window-bottom on-wall-right"/>
+
+                <div v-if="indexY == 2 && indexX == 3" class="window window-top on-wall-right"/>
+                <div v-if="indexY == 3 && indexX == 3" class="window window-bottom on-wall-right"/>
+
+
+                <RoomViewPopup v-if="areaItem.id" v-model="popup"
+                               :active="sensors[areaItem.id] ? sensors[areaItem.id].isShown : false"
                                :sensor="sensors[areaItem.id]"/>
 
               </v-card>
@@ -22,6 +31,13 @@
         </v-sheet>
       </v-col>
     </v-row>
+
+    <p class="mt-16 pt-16 mb-0 d-flex align-center">
+      <v-icon>mdi-cube</v-icon>
+      <span class="ml-2 text-h6">部屋の状況</span>
+    </p>
+    <p class="text-caption">部屋に設置されている<b>センサーの位置</b>とそれぞれの<b>センサーの計測値</b>を表示しています。</p>
+
   </div>
 
 </template>
@@ -87,3 +103,71 @@ export default {
 }
 </script>
 
+<style lang="scss">
+$cell-height: 100px;
+
+.door {
+  width: 10px;
+  height: 90px;
+  background: white;
+
+  position: absolute;
+
+  top: 4px;
+  left: -9px;
+}
+
+.door::after {
+  content: "";
+  background: white;
+  width: 5px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 2px #9E9E9E;
+  border-style: hidden dashed hidden hidden;
+}
+
+
+.window {
+  background: white;
+  border: 1px solid #9E9E9E;
+  width: 8px;
+  height: calc(#{$cell-height} * 0.8);
+}
+
+.basic::after {
+  content: "";
+  background: white;
+  width: 4px;
+  height: calc(#{$cell-height} * 0.8);
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  border: 1px solid #9E9E9E;
+}
+
+.on-wall-right {
+  position: absolute;
+  right: -9px;
+}
+
+.on-wall-left {
+  position: absolute;
+  left: -9px;
+}
+
+.window-bottom {
+  border: 1px #9E9E9E;
+  border-style: hidden solid solid solid;
+  top: -1px;
+}
+
+.window-top {
+  border: 1px #9E9E9E;
+  border-style: solid solid hidden solid;
+  bottom: -1px;
+}
+
+</style>

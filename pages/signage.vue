@@ -28,15 +28,35 @@
       </v-col>
 
       <v-col cols="6">
-        <v-card class="pa-4" outlined>
-          <v-card-title>
-            <span class="text-h5 font-weight-bold">各センサーの値</span>
-            <span class="text-subtitle-1 ml-2">二酸化炭素濃度</span>
-          </v-card-title>
-          <RoomView/>
-        </v-card>
-      </v-col>
+        <v-row no-gutters>
+          <v-col cols="12">
+            <v-card class="pa-4" outlined>
+              <v-card-title>
+                <span class="text-h5 font-weight-bold">各センサーの値</span>
+                <span class="text-subtitle-1 ml-2">二酸化炭素濃度</span>
+              </v-card-title>
+              <RoomView/>
+            </v-card>
+          </v-col>
+        </v-row>
 
+        <v-row no-gutters class="py-2">
+          <v-col cols="12">
+            <v-card class="pa-4" outlined>
+              <v-row no-gutters align-content="center">
+                <v-col cols="3" align-self="center">
+                  <v-img max-width="140" src="/qrcode.png"></v-img>
+                </v-col>
+                <v-col cols="9" align-self="end">
+                  <span class="text-body-2">このQRコードからWebアプリ版にアクセスできます。</span>
+                  <p class="no-gutters text-caption">過去の換気状況が確認できます。</p>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-col>
+        </v-row>
+
+      </v-col>
     </v-row>
   </div>
 </template>

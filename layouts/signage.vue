@@ -3,7 +3,7 @@
     <v-app-bar app color="transparent" flat>
       <v-toolbar-title>
         <span class="font-weight-bold">MONEA</span>
-        <span class="text-caption">複数台センサー対応型モニタリングシステム</span>
+        <span class="text-caption">換気状況監視システム</span>
       </v-toolbar-title>
     </v-app-bar>
     <v-main>

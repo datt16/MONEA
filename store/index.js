@@ -17,6 +17,5 @@ export const actions = {
         sensorId: roomSensorKeys[i],
       })
     }
-    context.commit('record/CALC_AVG', {})
   },
 }

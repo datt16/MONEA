@@ -77,6 +77,8 @@ export const actions = {
       { dataA: data[0], dataB: data[1] },
       { root: true }
     )
+
+    commit('sensor/SET_SENSOR_STATE')
   },
 }
 

@@ -3,7 +3,8 @@
     <v-row>
       <v-col cols="12">
         <v-sheet color="grey" class="pa-2 root">
-          <v-row v-for="(i, indexY) in areas" :key="indexY" no-gutters align-content="stretch">
+          <v-row v-if="loading" no-gutters>Loading...</v-row>
+          <v-row v-for="(i, indexY) in areas" v-else :key="indexY" no-gutters align-content="stretch">
             <v-col v-for="(areaItem, indexX) in i" :key="indexX" align-self="stretch">
               <v-card min-height="100" tile outlined
                       class="d-flex justify-center align-center">
@@ -45,53 +46,32 @@ export default {
   }
   ,
   data: () => ({
-    areas: {},
-    popup: false
-  }),
-  computed: {
-    sensors() {
-      const res = {}
-      const records = this.$store.getters['record/currentRecordWithAllSensor']
-      const sensorData = this.$store.getters['sensor/sensors']
-      const headers = this.$store.getters['common/headers']
-
-      const sensorList = Object.keys(records).filter(key => records[key].id !== "avg")
-      const target = "co2"
-
-      sensorList.forEach(key => {
-        const sensor = sensorData[key]
-        if (sensor) {
-          res[key] = {
-            id: sensor.id,
-            isShown: true,
-            title: sensor.name,
-            subTitle: headers[target].text,
-            value: records[key][target], // 注意: データ欠損の可能性あリ
-            color: sensor.color,
-            unit: headers[target].unit,
-            posX: sensor.position.x,
-            posY: sensor.position.y,
-            description: sensor.description,
-            statusCode: sensor.status.code
-          }
-        }
-      })
-      return res
-    }
-  },
-  mounted() {
-    this.areas = {
+    areas: {
       0: [{}, {}, {}, {}],
       1: [{}, {}, {}, {}],
       2: [{}, {}, {}, {}],
       3: [{}, {}, {}, {}]
-    }
-
-    Object.keys(this.sensors).forEach(x => {
-      const sensor = this.sensors[x]
-      this.areas[sensor.posY][sensor.posX].id = sensor.id
+    },
+    popup: false,
+    loading: true,
+    sensors: {}
+  }),
+  created() {
+    this.loading = true
+    const base = this.$store.getters["sensor/roomViewState"]
+    console.log(base)
+    Object.keys(base).forEach(x => {
+      this.$set(this.sensors, x, base[x])
     })
-  }
+
+    if (this.sensors) {
+      Object.keys(this.sensors).forEach(x => {
+        const sensor = this.sensors[x]
+        this.areas[sensor.posY][sensor.posX].id = sensor.id
+      })
+    }
+    this.loading = false
+  },
 
 }
 </script>

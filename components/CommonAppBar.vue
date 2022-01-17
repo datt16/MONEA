@@ -12,13 +12,25 @@
           <v-icon>mdi-menu-down</v-icon>
         </v-btn>
       </template>
-      <v-list v-for="(item, i) in rooms" :key="i" dense dark>
-        <v-list-item link @click="switchSensor(item.id)">
+
+      <v-list dense dark>
+        <v-subheader>モニタリング中の部屋</v-subheader>
+        <v-list-item v-for="(item, i) in rooms" :key="i" link @click="switchSensor(item.id)">
           <v-icon left dense>mdi-home</v-icon>
           <v-list-item-content>
             <v-list-item-title> {{ item.name }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+        <v-divider />
+        <v-subheader>試験的機能</v-subheader>
+        <v-list-item link to="/signage">
+          <v-icon left dense color="blue">mdi-view-dashboard-variant</v-icon>
+          <v-list-item-content>
+            <v-list-item-title class="blue--text">サイネージモード</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
       </v-list>
     </v-menu>
 

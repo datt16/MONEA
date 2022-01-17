@@ -1,8 +1,10 @@
 <template>
   <v-app>
+
     <common-app-bar :title="currentPageTitle"/>
+
     <v-main>
-      <v-container fluid>
+      <v-container>
         <v-slide-x-transition>
           <Nuxt/>
         </v-slide-x-transition>

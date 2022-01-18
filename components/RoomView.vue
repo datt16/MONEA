@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-row>
+    <v-row no-gutters justify="center"><span class="grey--text">後ろ</span></v-row>
+    <v-row no-gutters>
       <v-col cols="12">
         <v-sheet color="grey" class="pa-2 root">
           <v-row v-if="loading" no-gutters>Loading...</v-row>
@@ -31,6 +32,7 @@
         </v-sheet>
       </v-col>
     </v-row>
+    <v-row no-gutters justify="center"><span class="grey--text">前</span></v-row>
 
   </div>
 

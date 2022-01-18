@@ -47,31 +47,34 @@ export default {
     RoomViewPopup
   },
   data: () => ({
-    areas: {
-      0: [{}, {}, {}, {}],
-      1: [{}, {}, {}, {}],
-      2: [{}, {}, {}, {}],
-      3: [{}, {}, {}, {}]
-    },
     popup: false,
-    loading: true,
+    loading: false,
     sensors: {}
   }),
-  created() {
-    this.loading = true
-    const base = this.$store.getters["sensor/roomViewState"]
-    Object.keys(base).forEach(x => {
-      this.$set(this.sensors, x, base[x])
-    })
-    if (this.sensors) {
-      Object.keys(this.sensors).forEach(x => {
-        const sensor = this.sensors[x]
-        this.areas[sensor.posY][sensor.posX].id = sensor.id
+  computed: {
+    base() {
+      return this.$store.getters["sensor/roomViewState"]
+    },
+    areas() {
+      const a = {
+        0: [{}, {}, {}, {}],
+        1: [{}, {}, {}, {}],
+        2: [{}, {}, {}, {}],
+        3: [{}, {}, {}, {}]
+      }
+      const base = this.base
+      Object.keys(base).forEach(x => {
+        this.$set(this.sensors, x, base[x])
       })
+      if (this.sensors) {
+        Object.keys(this.sensors).forEach(x => {
+          const sensor = this.sensors[x]
+          a[sensor.posY][sensor.posX].id = sensor.id
+        })
+      }
+      return a
     }
-    this.loading = false
   },
-
 }
 </script>
 

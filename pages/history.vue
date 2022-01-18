@@ -60,6 +60,8 @@
                     item.co2 < 0
                       ? 'grey'
                       : item.co2 > 1000
+                      ? 'error'
+                      : item.co2 > 700
                       ? 'warning'
                       : 'success'
                   "
@@ -131,7 +133,7 @@ export default {
     },
     currentSensorName() {
       const key = this.$store.getters['common/currentSensor']
-      return this.sensors ? this.sensors[key].name : ""
+      return key==="avg" ? "各センサーの平均値" : this.sensors ? this.sensors[key].name : ""
     },
     records() {
       const data = this.$store.getters['record/records']

@@ -45,8 +45,7 @@ export default {
   name: "RoomView",
   components: {
     RoomViewPopup
-  }
-  ,
+  },
   data: () => ({
     areas: {
       0: [{}, {}, {}, {}],
@@ -61,11 +60,9 @@ export default {
   created() {
     this.loading = true
     const base = this.$store.getters["sensor/roomViewState"]
-    console.log(base)
     Object.keys(base).forEach(x => {
       this.$set(this.sensors, x, base[x])
     })
-
     if (this.sensors) {
       Object.keys(this.sensors).forEach(x => {
         const sensor = this.sensors[x]

@@ -34,7 +34,7 @@
               <v-list-item link @click="switchSensor(id)">
                 <v-icon left dense>mdi-home</v-icon>
                 <v-list-item-content>
-                  <v-list-item-title v-if="sensors">{{ sensors[id] ? sensors[id].name : id }}</v-list-item-title>
+                  <v-list-item-title v-if="sensors">{{ sensors[id] ? sensors[id].name : "センサーの平均値" }}</v-list-item-title>
                   <v-list-item-title v-else>Loading</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>

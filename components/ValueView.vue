@@ -24,9 +24,7 @@
         </v-card-title>
 
         <v-col v-if="$vuetify.breakpoint.xs">
-          <strong :class="`text-h3 font-weight-bold ${theme.bgColor}--text`">{{
-              value
-            }}</strong>
+          <strong :class="`text-h3 font-weight-bold ${theme.bgColor}--text`">{{ Math.round(value) }}</strong>
           <span
             v-if="type.length >= 3"
             :class="`text-subtitle-2 ${theme.bgColor}--text`"
@@ -36,7 +34,7 @@
         </v-col>
         <v-col v-else>
           <strong :class="`text-h3 font-weight-bold ${theme.bgColor}--text`">{{
-              value
+              Math.round(value)
             }}</strong>
           <span :class="`text-h5 ${theme.bgColor}--text`">{{ type }}</span>
         </v-col>

@@ -40,7 +40,7 @@
           <span class="text-subtitle-2">{{ sensor.subTitle }}</span>
         </v-col>
         <v-col cols="12">
-          <span class="text-h4 font-weight-bold">{{ sensor.value }}</span>
+          <span class="text-h4 font-weight-bold">{{ Math.round(sensor.value) }}</span>
           <span class="text-lg-body">{{ sensor.unit }}</span>
         </v-col>
       </v-row>

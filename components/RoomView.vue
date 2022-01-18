@@ -1,6 +1,16 @@
 <template>
   <div>
-    <v-row no-gutters justify="center"><span class="grey--text">後ろ</span></v-row>
+    <v-row no-gutters>
+      <v-col cols="2">
+        <span class="grey--text">廊下側</span>
+      </v-col>
+      <v-col cols="8">
+        <span class="d-flex justify-center grey--text">後ろ</span>
+      </v-col>
+      <v-col cols="2">
+        <span class="d-flex justify-end grey--text">窓側</span>
+      </v-col>
+    </v-row>
     <v-row no-gutters>
       <v-col cols="12">
         <v-sheet color="grey" class="pa-2 root">
@@ -23,6 +33,8 @@
 
 
                 <RoomViewPopup v-if="areaItem.id" v-model="popup"
+                               :offset-x="indexX === 0"
+                               :offset-y="indexX > 0"
                                :active="sensors[areaItem.id] ? sensors[areaItem.id].isShown : false"
                                :sensor="sensors[areaItem.id]"/>
 
@@ -49,7 +61,7 @@ export default {
   data: () => ({
     popup: false,
     loading: false,
-    sensors: {}
+    sensors: {},
   }),
   computed: {
     base() {
@@ -74,7 +86,7 @@ export default {
       }
       return a
     }
-  },
+  }
 }
 </script>
 

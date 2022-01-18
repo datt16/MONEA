@@ -2,7 +2,7 @@
   <div id="home">
     <v-row no-gutters>
       <v-col cols="12">
-        <air-status-view :co2="currentRecord.co2" />
+        <air-status-view :co2="currentRecord ? currentRecord.co2 : null"/>
       </v-col>
     </v-row>
 
@@ -12,17 +12,39 @@
           :type="head.type"
           :title="head.text"
           :icon="head.icon"
-          :value="currentRecord[head.value]"
+          :value="currentRecord ? currentRecord[head.value] : null"
         />
       </v-col>
     </v-row>
 
     <v-row class="py-2" no-gutters>
-      <v-col v-if="currentRecord.co2 < 0" cols="12">
-        <v-skeleton-loader type="card" />
+      <v-col cols="12">
+        <chart-view :records="co2ChartData"/>
       </v-col>
-      <v-col v-else cols="12">
-        <chart-view :records="co2ChartData" />
+    </v-row>
+
+    <v-row class="py-2" no-gutters>
+      <v-col cols="12">
+        <v-card dark color="cyan darken-2">
+          <v-card-title>
+            <span class="text-h6 font-weight-bold">アンケート協力のお願い</span>
+          </v-card-title>
+          <v-card-subtitle class="pb-0">
+            <span class="text-caption">
+              システム評価のためのアンケートへの回答をお願いします。
+            </span>
+          </v-card-subtitle>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn text dark class="justify-end font-weight-bold" href="https://forms.office.com/r/Y0j5b1400H" target="_blank">
+              <span>
+                回答する
+                <v-icon small>mdi-open-in-new</v-icon>
+              </span>
+            </v-btn>
+          </v-card-actions>
+
+        </v-card>
       </v-col>
     </v-row>
   </div>
@@ -69,6 +91,6 @@ export default {
         return []
       }
     },
-  },
+  }
 }
 </script>

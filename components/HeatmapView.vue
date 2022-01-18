@@ -1,8 +1,8 @@
 <template>
-  <v-row v-resize="onResize" justify="center">
-    <v-col cols="12" sm="10" lg="6">
-      <v-card flat>
-        <v-card-title class="pb-0 font-weight-bold">過去の換気状況</v-card-title>
+  <div>
+    <v-row v-resize="onResize" justify="center">
+      <v-col cols="12" sm="10" lg="6">
+        <div class="px-3 pb-0 font-weight-bold">過去の換気状況</div>
         <v-container>
           <div class="d-flex overflow-auto justify-center">
             <div>
@@ -43,9 +43,20 @@
 
           <Legend/>
         </v-container>
-      </v-card>
-    </v-col>
-  </v-row>
+
+      </v-col>
+    </v-row>
+    <v-container>
+      <p class="mb-0 d-flex align-center">
+        <v-icon dense color="blue">mdi-help-circle</v-icon>
+        <span class="ml-2 text-subtitle-1 font-weight-bold blue--text">ヒートマップ機能について</span>
+      </p>
+
+      <p class="text-caption mb-0">各センサーの計測値の平均値に応じて色分けしたヒートマップです。</p>
+      <p class="text-caption">色が濃い時間帯は二酸化炭素濃度が高く換気不足だったことが分かります。</p>
+
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -141,7 +152,7 @@ export default {
       }
     },
     rowLabels() {
-      return ['時間 | 分', '0~', '10~', '20~', '30~', '40~', '50~']
+      return ['時 \\ 分', '0~', '10~', '20~', '30~', '40~', '50~']
     },
   },
   mounted() {

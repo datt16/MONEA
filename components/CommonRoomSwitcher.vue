@@ -32,12 +32,10 @@
 export default {
   computed: {
     roomData() {
-      const data = this.$store.getters['common/room']
-      return data
+      return this.$store.getters['common/room']
     },
     rooms() {
-      const allRoom = this.$store.getters['common/rooms']
-      return allRoom
+      return this.$store.getters['common/rooms']
     },
   },
   methods: {

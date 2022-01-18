@@ -1,16 +1,21 @@
 export const actions = {
   nuxtClientInit: async (context) => {
-    // 部屋の情報取ってくる
+    // 部屋とセンサーの情報取ってくる
     await context.dispatch('common/getAllRoomsData')
+    await context.dispatch('sensor/getAllSensorData')
 
+    // 部屋情報の初期化、配列の0番目のセンサーをセットする。
     context.commit('common/INIT')
 
-    // センサーの値取ってくる
-    const sensors = context.getters['common/room'].sensors
+    // センサーのキーを取ってくる
+    const roomSensorKeys = context.getters['common/room'].sensors
 
-    for (let i = 0; i < sensors.length; i++) {
-      await context.dispatch('record/getRecordData', { sensorId: sensors[i] })
+    // 部屋の中にあるセンサーの計測値データを取ってくる
+    // await使うために通常for
+    for (let i = 0; i < roomSensorKeys.length; i++) {
+      await context.dispatch('record/getRecordData', {
+        sensorId: roomSensorKeys[i],
+      })
     }
-    context.commit('record/CALC_AVG', {})
   },
 }

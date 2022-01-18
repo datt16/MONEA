@@ -1,5 +1,5 @@
 <template>
-  <v-bottom-navigation v-model="current" color="primary" grow fixed shift>
+  <v-bottom-navigation v-model="current" color="primary" grow fixed>
     <v-btn
       v-for="nav in navigation"
       :key="nav.id"
@@ -27,11 +27,11 @@ const navigation = {
     icon: "mdi-home",
     title: "ホーム"
   },
-  actions: {
-    id: "actions",
-    link: "/actions",
-    icon: "mdi-menu",
-    title: "操作"
+  room: {
+    id: "room",
+    link: "/room",
+    icon: "mdi-cube",
+    title: "部屋の状況"
   },
 }
 

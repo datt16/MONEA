@@ -22,7 +22,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-divider />
+        <v-divider/>
         <v-subheader>試験的機能</v-subheader>
         <v-list-item link to="/signage">
           <v-icon left dense color="blue">mdi-view-dashboard-variant</v-icon>
@@ -35,6 +35,10 @@
     </v-menu>
 
     <v-spacer></v-spacer>
+
+    <v-btn color="cyan darken-2" depressed dark link href="https://forms.office.com/r/Y0j5b1400H" target="_blank">
+      アンケート
+    </v-btn>
 
   </v-app-bar>
 </template>

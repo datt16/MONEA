@@ -28,6 +28,6 @@
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-vue": "^7.12.1",
     "prettier": "^2.3.0",
-    "vue-apexcharts": "^1.6.2"
+    "node-forge": ">=1.0.0"
   }
 }

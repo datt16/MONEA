@@ -58,6 +58,7 @@ export default {
   methods: {
     switchSensor(id) {
       this.$store.dispatch('common/switchRoom', {id})
+      this.$router.replace('/')
     },
   },
 }

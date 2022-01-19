@@ -35,7 +35,7 @@
                 <span class="text-h5 font-weight-bold">各センサーの値</span>
                 <span class="text-subtitle-1 ml-2">二酸化炭素濃度</span>
               </v-card-title>
-              <RoomView/>
+              <RoomView />
             </v-card>
           </v-col>
         </v-row>
@@ -104,6 +104,10 @@ export default {
         return []
       }
     },
+    records() {
+      return this.$store.getters["record/records"]
+    }
+
   }
 }
 </script>

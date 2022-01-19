@@ -45,28 +45,28 @@ export const getters = {
 }
 
 export const actions = {
-  async getAllRoomsData({ commit }) {
+  async getAllRoomsData({commit}) {
     const rootRef = this.$fire.database.ref(`v1/rooms/roomId/`)
     try {
       await rootRef.once('value', (snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val()
-          commit('SET_ROOMS', { data })
+          commit('SET_ROOMS', {data})
         }
       })
     } catch (e) {
       alert(e)
     }
   },
-  async switchRoom({ state, commit, dispatch, context, rootGetters }, { id }) {
-    commit('SWITCH_CURRENT_ROOM', { id })
+  async switchRoom({state, commit, dispatch, context, rootGetters}, {id}) {
+    commit('SWITCH_CURRENT_ROOM', {id})
     const sensors = state.room.sensors
-    commit('record/RESET_STORE', null, { root: true })
+    commit('record/RESET_STORE', null, {root: true})
     for (let i = 0; i < sensors.length; i++) {
       await dispatch(
         'record/getRecordData',
-        { sensorId: sensors[i] },
-        { root: true }
+        {sensorId: sensors[i]},
+        {root: true}
       )
     }
 
@@ -74,11 +74,12 @@ export const actions = {
 
     commit(
       'record/CALC_AVG',
-      { dataA: data[0], dataB: data[1] },
-      { root: true }
+      {dataA: data[0], dataB: data[1]},
+      {root: true}
     )
 
-    commit('sensor/SET_SENSOR_STATE')
+    commit('sensor/INIT', {}, {root: true})
+    await dispatch('sensor/getAllSensorData', null, {root: true})
   },
 }
 
@@ -88,18 +89,18 @@ export const mutations = {
     state.room = state.rooms[state.currentRoom]
     state.currentSensor = state.room.sensors[0]
   },
-  SWITCH_CURRENT_ROOM(state, { id }) {
+  SWITCH_CURRENT_ROOM(state, {id}) {
     state.room = state.rooms[id]
     state.currentSensor = state.room.sensors[0]
   },
-  SET_ROOM(state, { data }) {
+  SET_ROOM(state, {data}) {
     state.room = data
     state.currentSensor = data.sensors[0]
   },
-  SET_CURRENT_SENSOR(state, { id }) {
+  SET_CURRENT_SENSOR(state, {id}) {
     state.currentSensor = id
   },
-  SET_ROOMS(state, { data }) {
+  SET_ROOMS(state, {data}) {
     state.rooms = data
   },
 }

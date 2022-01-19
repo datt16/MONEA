@@ -8,7 +8,6 @@
       <span class="ml-2 text-subtitle-1 font-weight-bold blue--text">この画面について</span>
     </p>
     <p class="text-caption">部屋に設置されている<b>センサーの位置</b>とそれぞれの<b>センサーの計測値</b>を表示しています。</p>
-
   </div>
 </template>
 
@@ -16,5 +15,10 @@
 
 export default {
   data: () => ({}),
+  computed: {
+    state() {
+      return this.$store.getters["sensor/roomViewState"]
+    }
+  }
 }
 </script>

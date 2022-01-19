@@ -1,6 +1,16 @@
 <template>
   <div>
-    <v-row no-gutters justify="center"><span class="grey--text">後ろ</span></v-row>
+    <v-row no-gutters>
+      <v-col cols="2">
+        <span class="grey--text">廊下側</span>
+      </v-col>
+      <v-col cols="8">
+        <span class="d-flex justify-center grey--text">後ろ</span>
+      </v-col>
+      <v-col cols="2">
+        <span class="d-flex justify-end grey--text">窓側</span>
+      </v-col>
+    </v-row>
     <v-row no-gutters>
       <v-col cols="12">
         <v-sheet color="grey" class="pa-2 root">
@@ -23,6 +33,8 @@
 
 
                 <RoomViewPopup v-if="areaItem.id" v-model="popup"
+                               :offset-x="indexX === 0"
+                               :offset-y="indexX > 0"
                                :active="sensors[areaItem.id] ? sensors[areaItem.id].isShown : false"
                                :sensor="sensors[areaItem.id]"/>
 
@@ -45,36 +57,36 @@ export default {
   name: "RoomView",
   components: {
     RoomViewPopup
-  }
-  ,
-  data: () => ({
-    areas: {
-      0: [{}, {}, {}, {}],
-      1: [{}, {}, {}, {}],
-      2: [{}, {}, {}, {}],
-      3: [{}, {}, {}, {}]
-    },
-    popup: false,
-    loading: true,
-    sensors: {}
-  }),
-  created() {
-    this.loading = true
-    const base = this.$store.getters["sensor/roomViewState"]
-    console.log(base)
-    Object.keys(base).forEach(x => {
-      this.$set(this.sensors, x, base[x])
-    })
-
-    if (this.sensors) {
-      Object.keys(this.sensors).forEach(x => {
-        const sensor = this.sensors[x]
-        this.areas[sensor.posY][sensor.posX].id = sensor.id
-      })
-    }
-    this.loading = false
   },
-
+  data: () => ({
+    popup: false,
+    loading: false,
+    sensors: {},
+  }),
+  computed: {
+    base() {
+      return this.$store.getters["sensor/roomViewState"]
+    },
+    areas() {
+      const a = {
+        0: [{}, {}, {}, {}],
+        1: [{}, {}, {}, {}],
+        2: [{}, {}, {}, {}],
+        3: [{}, {}, {}, {}]
+      }
+      const base = this.base
+      Object.keys(base).forEach(x => {
+        this.$set(this.sensors, x, base[x])
+      })
+      if (this.sensors) {
+        Object.keys(this.sensors).forEach(x => {
+          const sensor = this.sensors[x]
+          a[sensor.posY][sensor.posX].id = sensor.id
+        })
+      }
+      return a
+    }
+  }
 }
 </script>
 

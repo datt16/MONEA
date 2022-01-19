@@ -27,7 +27,7 @@ export const getters = {
         const rec = state.records[key].filter((_, i) => {
           return i >= state.recordCnt - 1
         })
-        list[key] = { ...{ id: key }, ...rec[0] }
+        list[key] = {...{id: key}, ...rec[0]}
       })
       return list
     } else {
@@ -104,7 +104,7 @@ export const getters = {
   },
   co2Array(state) {
     const data = state.records.avg
-    return data ? data.map((x) => ({ co2: x.co2, date: x.date })) : []
+    return data ? data.map((x) => ({co2: x.co2, date: x.date})) : []
   },
   recordCnt(state) {
     return state.recordCnt
@@ -112,7 +112,7 @@ export const getters = {
 }
 
 export const actions = {
-  async getRecordData({ commit, state }, { sensorId }) {
+  async getRecordData({commit, state}, {sensorId}) {
     const rootRef = this.$fire.database.ref(
       `v1/records/sensorId/${sensorId}/records`
     )
@@ -123,7 +123,7 @@ export const actions = {
         .on('value', (snapshot) => {
           if (snapshot.exists()) {
             const data = snapshot.val()
-            commit('SET_RECORD', { record: data, sensorId })
+            commit('SET_RECORD', {record: data, sensorId})
             // TODO: records未取得時の処理の追加
             commit('CALC_AVG', {
               dataA: state.records[Object.keys(state.records)[0]],
@@ -144,7 +144,7 @@ export const mutations = {
   },
   // SET_RECORD: RECORDをセット
   // TODO: 時間がずれていた時、どのようにして同期を行うか考える
-  SET_RECORD(state, { record, sensorId }) {
+  SET_RECORD(state, {record, sensorId}) {
     state.records = {
       ...state.records,
       [sensorId]: Object.entries(record).map(([date, value]) => ({
@@ -154,15 +154,18 @@ export const mutations = {
     }
   },
   // CALC_AVG: 各センサーの値から部屋全体の計測値の平均を求める
-  CALC_AVG(state, { dataA, dataB }) {
-    if (!(dataA && dataB)) {
-      state.records = { ...state.records }
+  CALC_AVG(state, {dataA, dataB}) {
+    if (!dataA) {
+      state.records = {...state.records}
       return
     }
 
-    const avgArray = dataA.map((record, i) => {
+    const avgArray = dataB ? dataA.map((record, i) => {
       return calcRecordAvg(record, dataB[i])
+    }) : dataA.map((record) => {
+      return calcRecordAvg(record, record)
     })
+
     state.records = {
       ...state.records,
       avg: avgArray,
@@ -179,3 +182,4 @@ const calcRecordAvg = (data1, data2) => {
   res.humid = (data1.humid + data2.humid) / 2
   return res
 }
+

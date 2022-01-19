@@ -34,7 +34,10 @@
               <v-list-item link @click="switchSensor(id)">
                 <v-icon left dense>mdi-home</v-icon>
                 <v-list-item-content>
-                  <v-list-item-title v-if="sensors">{{ sensors[id] ? sensors[id].name : id }}</v-list-item-title>
+                  <v-list-item-title v-if="sensors">{{
+                      sensors[id] ? sensors[id].name : "センサーの平均値"
+                    }}
+                  </v-list-item-title>
                   <v-list-item-title v-else>Loading</v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
@@ -60,6 +63,8 @@
                     item.co2 < 0
                       ? 'grey'
                       : item.co2 > 1000
+                      ? 'error'
+                      : item.co2 > 700
                       ? 'warning'
                       : 'success'
                   "
@@ -67,6 +72,18 @@
               >
                 {{ item.co2 }}
               </v-chip>
+            </template>
+
+            <template #[`item.temp`]="{ item }">
+              <span>{{ Math.round(item.temp * 10) / 10 }}</span>
+            </template>
+
+            <template #[`item.pressure`]="{ item }">
+              <span>{{ Math.round(item.pressure * 10) / 10 }}</span>
+            </template>
+
+            <template #[`item.humid`]="{ item }">
+              <span>{{ Math.round(item.humid * 10) / 10 }}</span>
             </template>
           </v-data-table>
 
@@ -131,7 +148,7 @@ export default {
     },
     currentSensorName() {
       const key = this.$store.getters['common/currentSensor']
-      return this.sensors ? this.sensors[key].name : ""
+      return key === "avg" ? "各センサーの平均値" : this.sensors ? this.sensors[key].name : ""
     },
     records() {
       const data = this.$store.getters['record/records']

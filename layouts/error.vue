@@ -7,6 +7,8 @@
           <span class="text-h5 d-flex text-center justify-center align-center"><b
             class="mr-1"> :(</b>エラーが発生しました</span><br>
           <span
+            class="mt-3 text-caption d-flex text-center justify-center align-center">下のボタンからホームに移動するかリロードしてみてください。</span><br>
+          <span
             class="text-caption d-flex text-center justify-center align-center">何度もこの画面が表示される場合は作成者に問い合わせください。</span>
         </v-col>
       </v-row>

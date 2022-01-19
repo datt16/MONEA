@@ -25,7 +25,7 @@
 
     <v-row class="py-2" no-gutters>
       <v-col cols="12">
-        <v-card dark color="cyan darken-2">
+        <v-card dark color="cyan darken-2" class="mb-16">
           <v-card-title>
             <span class="text-h6 font-weight-bold">アンケート協力のお願い</span>
           </v-card-title>

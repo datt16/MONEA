@@ -6,6 +6,13 @@
 
 [MONEA](https://monea-2021.web.app/)
 
+### スクリーンショット
+画像は開発中のものです
+![monea-2021 web app_signage(iPad Air)](https://user-images.githubusercontent.com/44765362/156187269-e12c8223-52dd-4e86-8b04-94b52a0474c4.png)
+
+### システム構成
+![MONEA_共有用資料](https://user-images.githubusercontent.com/44765362/156187643-a161e966-fec2-4e0e-b11d-e6e30b1c72d2.png)
+
 ### Repo
 
 - [MONEA](https://github.com/datt16/MONEA) // クライアントアプリ

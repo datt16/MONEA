@@ -9,7 +9,7 @@ export default {
     titleTemplate: '%s - monea-nuxt',
     title: 'monea-nuxt',
     htmlAttrs: {
-      lang: 'ja'
+      lang: 'ja',
     },
     meta: [
       { charset: 'utf-8' },
@@ -57,9 +57,7 @@ export default {
     services: {
       auth: {
         persistence: 'local',
-        initialize: {
-          onAuthStateChangedAction: 'auth/onAuthStateChanged', // ... 1
-        },
+        initialize: {},
       },
       firestore: true,
       database: true,

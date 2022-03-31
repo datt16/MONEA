@@ -53,15 +53,15 @@ export default {
   },
   computed: {
     roomData() {
-      return this.$store.getters['common/room']
+      return this.$store.getters['room/room']
     },
     rooms() {
-      return this.$store.getters['common/rooms']
+      return this.$store.getters['room/rooms']
     },
   },
   methods: {
     switchSensor(id) {
-      this.$store.dispatch('common/switchRoom', {id})
+      this.$store.dispatch('room/switchRoom', {id})
       this.$router.replace('/')
     },
   },

@@ -1,7 +1,7 @@
 <template>
   <v-row no-gutters>
     <v-tabs v-model="mode" class="mb-4" fixed-tabs>
-      <v-tabs-slider color="blue"/>
+      <v-tabs-slider color="blue" />
       <v-tab>
         <v-icon dense>mdi-table</v-icon>
         <span class="pl-1">テーブル</span>
@@ -34,9 +34,8 @@
               <v-list-item link @click="switchSensor(id)">
                 <v-icon left dense>mdi-home</v-icon>
                 <v-list-item-content>
-                  <v-list-item-title v-if="sensors">{{
-                      sensors[id] ? sensors[id].name : "センサーの平均値"
-                    }}
+                  <v-list-item-title v-if="sensors"
+                    >{{ sensors[id] ? sensors[id].name : 'センサーの平均値' }}
                   </v-list-item-title>
                   <v-list-item-title v-else>Loading</v-list-item-title>
                 </v-list-item-content>
@@ -54,20 +53,20 @@
             :mobile-breakpoint="null"
           >
             <template #[`item.date`]="{ item }">
-              <div>{{ item.date.split("_")[1] }}</div>
+              <div>{{ item.date.split('_')[1] }}</div>
             </template>
 
             <template #[`item.co2`]="{ item }">
               <v-chip
                 :color="
-                    item.co2 < 0
-                      ? 'grey'
-                      : item.co2 > 1000
-                      ? 'error'
-                      : item.co2 > 700
-                      ? 'warning'
-                      : 'success'
-                  "
+                  item.co2 < 0
+                    ? 'grey'
+                    : item.co2 > 1000
+                    ? 'error'
+                    : item.co2 > 700
+                    ? 'warning'
+                    : 'success'
+                "
                 dark
               >
                 {{ item.co2 }}
@@ -92,15 +91,13 @@
             :length="pageCount"
             circle
           ></v-pagination>
-
         </v-tab-item>
 
         <v-tab-item>
           <span class="text-h6">
-            <HeatmapView/>
+            <HeatmapView />
           </span>
         </v-tab-item>
-
       </v-tabs-items>
     </v-col>
   </v-row>
@@ -148,7 +145,11 @@ export default {
     },
     currentSensorName() {
       const key = this.$store.getters['common/currentSensor']
-      return key === "avg" ? "各センサーの平均値" : this.sensors ? this.sensors[key].name : ""
+      return key === 'avg'
+        ? '各センサーの平均値'
+        : this.sensors // this.sensor 内がセットされていない状態で遷移しても画面表示ができるように
+        ? this.sensors[key].name
+        : 'Loading...'
     },
     records() {
       const data = this.$store.getters['record/records']
@@ -165,7 +166,7 @@ export default {
   },
   methods: {
     switchSensor(id) {
-      this.$store.commit('common/SET_CURRENT_SENSOR', {id})
+      this.$store.commit('common/SET_CURRENT_SENSOR', { sensorId: id })
     },
   },
 }

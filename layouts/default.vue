@@ -1,30 +1,24 @@
 <template>
   <v-app>
-
-    <common-app-bar :title="currentPageTitle"/>
+    <common-app-bar :title="currentPageTitle" />
 
     <v-main>
       <v-container>
         <v-slide-x-transition>
-          <Nuxt/>
+          <Nuxt />
         </v-slide-x-transition>
       </v-container>
     </v-main>
 
-    <common-bottom-navigation @navigate="currentPageTitle = $event"/>
+    <common-bottom-navigation @navigate="currentPageTitle = $event" />
   </v-app>
 </template>
 
 <script>
 export default {
-  name: "DefaultLayout",
+  name: 'DefaultLayout',
   data: () => ({
-    currentPageTitle: "ホーム"
+    currentPageTitle: 'ホーム',
   }),
-  methods: {
-    switchSensor(id) {
-      this.$store.dispatch('common/switchRoom', {id})
-    },
-  },
 }
 </script>
